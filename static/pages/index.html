@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <!-- Jquery google link can be included in the header-->
+    </head>
+    <body>
+        <h1>this is the index page</h1>
+        <input type='text' id='search-box' placeholder="search">
+        <input type='button' id='submit-search' placeholder="submit">
+
+    </body>
+
+    <footer>
+        <!--- javascript script is loaded in the footer as render_template will execture the
+        the script Prematurely if included in the header-->
+        <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}" ></script>
+    </footer>
+
+</html>
