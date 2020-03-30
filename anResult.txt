@@ -1,0 +1,1 @@
+https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=-33.917329664,151.225332432&radius=2000&types=meal_takeaway&sensor=false&key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4
