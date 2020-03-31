@@ -1,0 +1,19 @@
+.main {
+    position: fixed;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%);
+    width: 80%;
+    height: 100%;
+    color: #BBB;
+    overflow: scroll;
+}
+
+.post {
+    position: relative;
+    left: 5%;
+    transform: translate(-5%, 0%);
+    width: 90%;
+    height: 100px;
+    color: #444
+}
