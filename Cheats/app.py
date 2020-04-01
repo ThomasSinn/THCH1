@@ -14,7 +14,6 @@ app = Flask(__name__, static_folder='static/scripts', template_folder='static/pa
 def landingPage():
     return render_template('index.html')
 
-"""
 #this route will produce a screen of cards which relate to the
 #search terms.
 @app.route('/search/<searchterms>')
@@ -26,7 +25,7 @@ def search(searchterms):
 @app.route('/store/<storeid>')
 def compare():
     return render_template('store.html')
-"""
+
 
 #needs to be passed a jsonified geolocation
 #database is also populated through this method
@@ -46,5 +45,5 @@ def tester():
     return jsonify(result="find an island")
  
  
- if __name__ == "__main__":
+if __name__ == "__main__":
     app.run()
