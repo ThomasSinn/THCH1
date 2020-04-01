@@ -1,7 +1,7 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import json
 import sqlite3
@@ -14,6 +14,7 @@ app = Flask(__name__, static_folder='static/scripts', template_folder='static/pa
 def landingPage():
     if request.method == "POST":
         searchtext = request.form.get("search")
+        return redirect(url_for('search'), searchterms=searchtext)
     return render_template('index.html')
 
 
