@@ -36,14 +36,39 @@ CREATE TABLE gigPricing(
     price integer,
     FOREIGN KEY (RID) REFERENCES restaurants(RID)
 );
+
+result : {
+    "restaurant1" : {
+        "uber" : 5
+        "deliveroo" : 6
+    }
+
+
+
+}
+
+
+
+
+
 '''
 def dbPrice():
+    diction = {}
     conn = sqlite3.connect('database')
     cur = conn.cursor()
-    cur.execute("SELECT g.service, g.price, r.name FROM gigPricing g JOIN restaurants r on r.RID=g.RID group by name")
+    cur.execute("SELECT r.name, g.service, g.price FROM gigPricing g JOIN restaurants r on r.RID=g.RID group by name")
     result = cur.fetchall()
+
+    for tup in result: 
+        if tup[0] not in diction:
+            diction[tup[0]] = {tup[1] : tup[2]}
+        else:
+            diction[tup[0]].append({tup[1] : tup[2]})
+
+    #print("dictionary of restaurants", diction, "====================================")
+    #print("fetched result", result)
     conn.commit()
     result = json.dumps(result)
-    return result 
+    return diction
 
 
