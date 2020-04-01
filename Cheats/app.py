@@ -28,9 +28,8 @@ def compare():
 #needs to be passed a jsonified geolocation
 #database is also populated through this method
 @app.route('/GetDB', methods=['POST'])
-def dbOut(request):
-    return request.json('latitude')
-    content = request.json('latitude')
+def dbOut():
+    content = request.json.get('latitude')
     print(content)
     #CreateLoc(content)
     return ParseDB()
