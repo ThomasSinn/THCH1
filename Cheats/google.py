@@ -8,6 +8,7 @@ import threading
 import requests
 import shutil
 import random
+from HelperFunction import FakeOrders
 
 #google key -> global scope as it is used in multiple functions
 AUTH_KEY = "AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4"
@@ -40,7 +41,7 @@ def getrestuarants(locationobject):
         print(each)
         print("\n")
 
-        name = each['name'].replace("'", "%27")
+        name = each['name'].replace("'", "''")
         opening_hours = each['opening_hours']['open_now']
 
         try:
@@ -74,11 +75,13 @@ def InsertDB(JSONelement):
     print(("INSERT INTO restaurants VALUES({name}, {open}, {photo})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath']))
 
     conn.execute(
-    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}', {price})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], price=random.randint(0, 15)))
-
+    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}')").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath']))
     conn.commit()
-    print('executed and commited')
     conn.close()
+    print('gets through insert phase')
+    #creates fake pricing for orders
+    FakeOrders(JSONelement['name'])
+    print('executed and commited')
 
 #takes a reference ID a returns the URL
 #this url will have to be changed to the source of any cards we use.
