@@ -1,14 +1,14 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
 
 #Home Page
 @app.route('/')
 def landingPage():
-    return render_template('index.html')
+    return render_template('sandbox.html')
 
 """
 #this route will produce a screen of cards which relate to the
@@ -23,5 +23,11 @@ def search(searchterms):
 def compare():
     return render_template('store.html')
 """
+
+@app.route('/shit', methods=['GET'])
+def tester():
+    print('TESTING')
+    return jsonify(result="find an island")
+
 if __name__ == "__main__":
     app.run()
