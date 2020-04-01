@@ -25,7 +25,7 @@ def search(searchterms):
 #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare():
-    return render_template('store.html')
+    return render_template('comparepage.html')
 """
 
 #needs to be passed a jsonified geolocation
@@ -46,5 +46,5 @@ def tester():
     return jsonify(result="find an island")
  
  
- if __name__ == "__main__":
+if __name__ == "__main__":
     app.run()
