@@ -18,7 +18,10 @@ def FakeOrders(name):
     #then bind these services to that rid.
     print("INSERT INTO gigpricing values({TRID}, {service}, {price})".format(TRID=RID[0], service=services[random.randint(0,3)], price=random.randint(0,15)))
 
-    query = "INSERT INTO gigpricing values(NULL,{TRID}, '{service}', {price})".format(TRID=RID[0], service=services[random.randint(0,3)], price=random.randint(0,15))
-    cur.execute(query)
+    i = 0
+    while(i < 4):
+        query = "INSERT INTO gigpricing values(NULL,{TRID}, '{service}', {price})".format(TRID=RID[0], service=services[i], price=random.randint(0,15))
+        cur.execute(query)
+        i += 1
     conn.commit()
     conn.close()

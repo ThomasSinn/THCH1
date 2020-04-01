@@ -35,18 +35,6 @@ def search(searchterms):
     for row in cur1.fetchall():
         results += [row[0]]
 
-    return render_template('searchpage.html', results=results)
-
-    cur1 = conn.cursor()
-
-    cur1.execute(f"""
-    SELECT NAME FROM RESTAURANTS
-    WHERE NAME LIKE '%{searchtext}%'
-    ;
-    """)
-
-    for row in cur1.fetchall():
-        results += [row[0]]
 
     return render_template('searchpage.html', results=results)
 
