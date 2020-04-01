@@ -2,7 +2,7 @@
 
 function tryme() {
     // just to check if the files are linked properly 
-    document.write("hello");
+    alert('hello');
 };
 
 // make some ajax calls 
@@ -23,12 +23,6 @@ $(document).ready(function() {
         $('#result').text(data.result);
     });
 })
-
-
-
-
-
-
 
 
 /*
