@@ -20,6 +20,7 @@ class locationOBJ:
         self.range = range
 
 
+
 def getrestuarants(locationobject):
     #making the http request
     location = str(locationobject.latitude) + "," + str(locationobject.longtitude)
@@ -86,8 +87,8 @@ def getImages(googleItem):
 
 #gps coords for UNSW
 #need to get this from the front end
-testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
-getrestuarants(testobj)
+# testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
+# getrestuarants(testobj)
 
 
 #code which may be integrated later on.
