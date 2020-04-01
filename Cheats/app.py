@@ -8,7 +8,7 @@ app = Flask(__name__, static_folder='static/scripts', template_folder='static/pa
 #Home Page
 @app.route('/')
 def landingPage():
-    return render_template('sandbox.html')
+    return render_template('comparepage.html')
 
 """
 #this route will produce a screen of cards which relate to the
