@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request
 from dbInterface import CreateLoc, ParseDB
 import json
+import sqlite3
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
@@ -13,14 +14,16 @@ app = Flask(__name__, static_folder='static/scripts', template_folder='static/pa
 def landingPage():
     if request.method == "POST":
         searchtext = request.form.get("search")
+    return render_template('index.html')
+
 
 #this route will produce a screen of cards which relate to the
 #search terms.
 @app.route('/search/<searchterms>')
 def search(searchterms):
     print(searchterms) #prints the terms passed from the index
-    return render_template('searchpage.html')
-
+    #return render_template('searchpage.html')
+    conn = sqlite3.connect(database)
     cur1 = conn.cursor()
 
     cur1.execute(f"""
@@ -34,7 +37,18 @@ def search(searchterms):
 
     return render_template('searchpage.html', results=results)
 
+    cur1 = conn.cursor()
 
+    cur1.execute(f"""
+    SELECT NAME FROM RESTAURANTS
+    WHERE NAME LIKE '%{searchtext}%'
+    ;
+    """)
+
+    for row in cur1.fetchall():
+        results += [row[0]]
+
+    return render_template('searchpage.html', results=results)
 
 # #should be the actual comparison of the gig economy pricing
 # @app.route('/store/<storeid>')
