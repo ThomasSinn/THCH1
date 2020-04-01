@@ -20,5 +20,30 @@ def ParseDB():
     result = json.dumps(result)
     return result
 
+#get prices for the front end
+
+'''
+CREATE TABLE restaurants(
+    RID integer PRIMARY KEY,
+    name varchar(255),
+    open boolean NOT NULL,
+    photoPath varchar(255)
+);
+CREATE TABLE gigPricing(
+    PID integer PRIMARY KEY,
+    RID integer,
+    service varchar(30),
+    price integer,
+    FOREIGN KEY (RID) REFERENCES restaurants(RID)
+);
+'''
+def dbPrice():
+    conn = sqlite3.connect('database')
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM gigPricing")
+    result = cur.fetchall()
+    conn.commit()
+    result = json.dumps(result)
+    return result 
 
 
