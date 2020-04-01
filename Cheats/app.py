@@ -39,7 +39,6 @@ def search(searchterms):
     for row in cur1.fetchall():
         results += [row[0]]
 
-
     return render_template('searchpage.html', results=results)
 
 # #should be the actual comparison of the gig economy pricing
