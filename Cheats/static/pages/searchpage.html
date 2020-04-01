@@ -57,7 +57,7 @@
         {% for i in results %}
             <div class="column">
                 <div class="card">
-                    <img src="{{ 'https://source.unsplash.com/400x400/?{}'.format(i.name) }}" style="width:100%">
+                    <img src="{{i.photopath}}" style="width:100%">
                     <div class="container">
                         <h4><b>{{i.name}}</b></h4>
                         <p>0.3km away</p>

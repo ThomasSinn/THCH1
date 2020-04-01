@@ -29,7 +29,7 @@ def search(searchterms):
     cur1 = conn.cursor()
 
     cur1.execute(f"""
-    SELECT NAME FROM RESTAURANTS
+    SELECT NAME, PHOTOPATH FROM RESTAURANTS
     WHERE NAME LIKE '%{searchterms}%'
     ;
     """)
@@ -38,7 +38,8 @@ def search(searchterms):
 
     for row in cur1.fetchall():
         results += [{
-            "name": row[0]
+            "name": row[0],
+            "photopath" : row[1]
         }]
 
     return render_template('searchpage.html', results=results)
