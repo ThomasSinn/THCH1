@@ -2,7 +2,7 @@
 #uberch'eats project
 
 from flask import Flask, render_template, request
-from dbInterface import CreateLoc, ParseDB
+from dbInterface import CreateLoc, ParseDB, dbPrice
 import json
 import sqlite3
 
@@ -55,6 +55,12 @@ def search(searchterms):
 # def compare():
 #     return render_template('comparepage.html')
 
+
+@app.route('/prices', methods=['GET'])
+def getPrices():
+    print(dbPrice())
+    return dbPrice()
+
 #needs to be passed a jsonified geolocation
 #database is also populated through this method
 @app.route('/GetDB', methods=['POST'])
@@ -71,5 +77,6 @@ def dbOut():
 #     return jsonify(result="find an island")
  
  
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    app.run()
+    getPrices()
