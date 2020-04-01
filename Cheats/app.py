@@ -24,8 +24,7 @@ def search(searchterms):
 #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare():
-    return render_template('store.html')
-
+    return render_template('comparepage.html')
 
 #needs to be passed a jsonified geolocation
 #database is also populated through this method
@@ -36,8 +35,6 @@ def dbOut():
     CreateLoc(content)
     print("about to return in dbOut")
     return ParseDB()
-
-
 
 @app.route('/shit', methods=['GET'])
 def tester():
