@@ -17,10 +17,10 @@ $(document).ready(function() {
         url: '/shit'
     })
     .done(function(data){
-        alert('shit');
-        document.write('shitfuckfuckingwork');
-        document.write(data.result);
-        $('#result'.text(data.result));
+        // alert('shit');
+        // document.write('shitfuckfuckingwork');
+        // document.write(data.result);
+        $('#result').text(data.result);
     });
 })
 
