@@ -4,8 +4,9 @@
     </header>
     <body>
         <h1> This is the search page</h1>
-        <p id="searchPro">results should appear in this paragraph</p>
-
+        {% for i in results %}
+        <li><p>{{i}}</p></li>
+        {% endfor %}
     </body>
     <footer>
 

@@ -1,23 +1,26 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
 
 #Home Page
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def landingPage():
-    return render_template('index.html')
+    if request.method == "POST":
+        searchtext = request.form.get("search")
 
+        return redirect(url_for('searchPage', searchtext=searchtext))
+    else:
+        return render_template('index.html')
+
+@app.route('/search/<searchtext>', methods=["GET", "POST"])
+def searchPage(searchtext):
+    results = ["bruh", "mmmhmmm", "heyyy"]
+
+    return render_template('searchpage.html', results=results)
 """
-#this route will produce a screen of cards which relate to the
-#search terms.
-@app.route('/search/<searchterms>')
-def search(searchterms):
-    print(searchterms) #prints the terms passed from the index
-    return render_template('searchpage.html')
-
 #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare():
