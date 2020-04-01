@@ -1,8 +1,9 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from dbInterface import CreateLoc, ParseDB, dbPrice
+import db
 import json
 import sqlite3
 
@@ -14,6 +15,7 @@ app = Flask(__name__, static_folder='static/scripts', template_folder='static/pa
 def landingPage():
     if request.method == "POST":
         searchtext = request.form.get("search")
+        return redirect(url_for('search', searchterms=searchtext))
     return render_template('index.html')
 
 
@@ -23,18 +25,19 @@ def landingPage():
 def search(searchterms):
     print(searchterms) #prints the terms passed from the index
     #return render_template('searchpage.html')
-    conn = sqlite3.connect(database)
+    conn = db.connect()
     cur1 = conn.cursor()
 
     cur1.execute(f"""
     SELECT NAME FROM RESTAURANTS
-    WHERE NAME LIKE '%{searchtext}%'
+    WHERE NAME LIKE '%{searchterms}%'
     ;
     """)
 
+    results = []
+
     for row in cur1.fetchall():
         results += [row[0]]
-
 
     return render_template('searchpage.html', results=results)
 
