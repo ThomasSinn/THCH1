@@ -7,8 +7,9 @@ import sqlite3
 import threading
 import requests
 import shutil
+import random
 
-#global scope as it is used in multiple functions
+#google key -> global scope as it is used in multiple functions
 AUTH_KEY = "AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4"
 
 class locationOBJ:
@@ -38,33 +39,34 @@ def getrestuarants(locationobject):
     impData = []
     for each in jsonData['results']:
         impData.append({
-            "name" : each['name'],
-            "opening_hours" : each['opening_hours'],
-            "photopath" : each['photos']
+            "name" : each['name'].replace("'", "%27"),
+            "opening_hours" : each['opening_hours']['open_now'],
+            "photopath" : each['photos'][0]['photo_reference']
         })
 
-    #to prevent a function call to the database blocking front end up date. 
-    x = threading.Thread(target=threadedUpdate, args=(impData,))
-    x.run()
+    #include threading here later to prevent blocking function call. 
+    #very ineffiecent atm
+    for each in impData:
+        InsertDB(each)
 
     return impData
 
 
-def threadedUpdate(ResList):
+def InsertDB(JSONelement):
+    #print(JSONelement)
     conn = sqlite3.connect('database')
     cursor = conn.cursor()
 
-    print('\n threaded updater running\n ')
-    #most dangerous way possible to manage a database, but she'll be right
-    query = "INSERT INTO restuarants VALUES(%s, %s, %s)"
-    
-    print(str(ResList[0]['name']), str(ResList[0]['opening_hours']['open_now']), str(getImages(ResList[0]['photopath'])))
+    print(("INSERT INTO restaurants VALUES({name}, {open}, {photo})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath']))
 
-    for each in ResList:
-        #print(each['name'], each['opening_hours'])
-        conn.execute(query, (str(each['name']), str(each['opening_hours']['open_now']), str(getImages(each['photopath']))))
-    
-    return True
+    conn.execute(
+    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}', {price})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], price=random.randint(0, 15)))
+
+    conn.commit()
+    print('executed and commited')
+    conn.close()
+
+
 
 #image download from 'places api' and saves them to photos folder
 #issue downloads empty images 
@@ -82,5 +84,25 @@ def getImages(googleItem):
     return ("static/photos/" + each['photo_reference'] + ".jpg")
 
 
+#gps coords for UNSW
+#need to get this from the front end
 testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
 getrestuarants(testobj)
+
+
+#code which may be integrated later on.
+# def threadedUpdate(ResList):
+#     conn = sqlite3.connect('database')
+#     cursor = conn.cursor()
+
+#     print('\n threaded updater running\n ')
+#     #most dangerous way possible to manage a database, but she'll be right
+#     query = "INSERT INTO restuarants VALUES(%s, %s, %s)"
+    
+#     print(str(ResList[0]['name']), str(ResList[0]['opening_hours']['open_now']), str(getImages(ResList[0]['photopath'])))
+
+#     for each in ResList:
+#         #print(each['name'], each['opening_hours'])
+#         conn.execute(query, (str(each['name']), str(each['opening_hours']['open_now']), str(getImages(each['photopath']))))
+    
+#     return True
