@@ -6,12 +6,12 @@ console.log("script file loaded");
 var restuarantList = [];
 
 function getLocation(geoLocation) {
-    console.log({
-        "latitude" : geoLocation.coords.latitude,
-        "longitude" : geoLocation.coords.longitude,
-    });
+    // console.log({
+    //     "latitude" : geoLocation.coords.latitude,
+    //     "longitude" : geoLocation.coords.longitude,
+    // });
     
-    geoLocation = {
+    let geoLocation2 = {
         latitude : geoLocation.coords.latitude,
         longitude : geoLocation.coords.longitude,
     }
@@ -21,7 +21,7 @@ function getLocation(geoLocation) {
         type : 'POST',
         contentType: "application/json;charset=UTF-8",
         async: false,
-        data : geoLocation,
+        data: JSON.stringify(geoLocation2),
         success: function(response){
             console.log(response)
             //restuarantList = JSON.parse(response);

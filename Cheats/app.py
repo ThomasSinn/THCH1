@@ -3,7 +3,7 @@
 
 from flask import Flask, render_template, request
 from dbInterface import CreateLoc, ParseDB
-
+import json
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
 
 #Home Page
@@ -28,13 +28,13 @@ def compare():
 #needs to be passed a jsonified geolocation
 #database is also populated through this method
 @app.route('/GetDB', methods=['POST'])
-def dbOut(request):
-    print(request)
-    content = request.json('latitude')
+def dbOut():
+    content = request.json
     print(content)
-    #CreateLoc(content)
-    return request
-
-
+    CreateLoc(content)
+    print("about to return in dbOut")
+    return ParseDB()
+ 
+ 
 if __name__ == "__main__":
     app.run()

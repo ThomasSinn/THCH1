@@ -6,7 +6,7 @@ import json
 def CreateLoc(geodata):
     #range case can be changed if the front allows for range alterations
     #default value is 2000 meters
-    newOBJ = locationOBJ(geodata.latitude, geodata.longitude, 2000)
+    newOBJ = locationOBJ(geodata['latitude'], geodata['longitude'], 2000)
     getrestuarants(newOBJ)
     print('location passed and database populated')
 
