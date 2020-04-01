@@ -19,8 +19,6 @@ class locationOBJ:
         self.latitude = latitude
         self.range = range
 
-
-
 def getrestuarants(locationobject):
     #making the http request
     location = str(locationobject.latitude) + "," + str(locationobject.longtitude)
