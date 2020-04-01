@@ -1,0 +1,6 @@
+Usage: 
+- sqlite3 to access 
+- 
+- .databases - list names and files of attached databases
+- .fullschema ?--indent? show schema and the content of sqlite_stat tables 
+- control+D to exit 
