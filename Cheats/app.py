@@ -2,6 +2,7 @@
 #uberch'eats project
 
 from flask import Flask, render_template, request, redirect, url_for
+import db
 
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
 
@@ -17,7 +18,20 @@ def landingPage():
 
 @app.route('/search/<searchtext>', methods=["GET", "POST"])
 def searchPage(searchtext):
-    results = ["bruh", "mmmhmmm", "heyyy"]
+    results = []
+
+    conn = db.connect()
+
+    cur1 = conn.cursor()
+
+    cur1.execute(f"""
+    SELECT NAME FROM RESTAURANTS
+    WHERE NAME LIKE '%{searchtext}%'
+    ;
+    """)
+
+    for row in cur1.fetchall():
+        results += [row[0]]
 
     return render_template('searchpage.html', results=results)
 """
