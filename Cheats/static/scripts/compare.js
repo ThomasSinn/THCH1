@@ -33,6 +33,7 @@ $(document).ready(function() {
         // document.write('shitfuckfuckingwork');
         // document.write(data.result);
         $('#result').text(data.result);
+        
     });
 })
 

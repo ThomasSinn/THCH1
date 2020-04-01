@@ -99,6 +99,13 @@ nav{
     transform: translate(175%,60%);
 }
 
+.location-title {
+    display: flex;
+    position: relative;
+    top: 120px;
+    left: 700px;
+}
+
 .grid-wrapper img{
     width: 75px;
 }
