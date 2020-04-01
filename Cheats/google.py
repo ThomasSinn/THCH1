@@ -100,5 +100,6 @@ def getImages(googleItem):
     return ("static/photos/" + each['photo_reference'] + ".jpg")
 
 
+#gps coords for UNSW
 testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
 getrestuarants(testobj)
