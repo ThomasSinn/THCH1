@@ -4,6 +4,7 @@
 from flask import Flask, render_template, request
 from dbInterface import CreateLoc, ParseDB
 import json
+import sqlite3
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
@@ -20,8 +21,8 @@ def landingPage():
 @app.route('/search/<searchterms>')
 def search(searchterms):
     print(searchterms) #prints the terms passed from the index
-    return render_template('searchpage.html')
-
+    #return render_template('searchpage.html')
+    conn = sqlite3.connect(database)
     cur1 = conn.cursor()
 
     cur1.execute(f"""
