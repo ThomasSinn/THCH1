@@ -1,3 +1,10 @@
+
+.masterHead {
+    position: sticky;
+    text-align: center;
+    font: sans-serif;
+    
+}
 .main {
     position: fixed;
     left: 50%;
@@ -16,4 +23,6 @@
     width: 90%;
     height: 100px;
     color: #444
+
 }
+
