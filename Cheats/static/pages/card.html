@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+                transition: 0.3s;
+                border-radius: 5px;
+            }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+            }
+
+            img {
+                border-radius: 5px 5px 0 0;
+            }
+
+            .container {
+                padding: 2px 16px;
+            }
+
+            /* Float four columns side by side */
+            .column {
+                float: left;
+                width: 45%;
+                padding: 0 20px;
+            }
+
+            /* Remove extra left and right margins, due to padding */
+            .row {
+                margin: 20 20px;
+                padding: 20 20px;
+            }
+
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            /* Responsive columns */
+            @media screen and (max-width: 300) {
+                .column {
+                    width: 100%;
+                    display: block;
+                    margin-bottom: 20px;
+                }
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2>TEMPLATE CARDS FOR RESTAURANT</h2>
+
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <img src="https://source.unsplash.com/400x400/?bread" style="width:100%">
+                    <div class="container">
+                        <h4><b>Baker's Bread</b></h4>
+                        <p>0.3km away</p>
+                        <p>★★★☆☆</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <img src="https://source.unsplash.com/400x400/?kebabs" style="width:100%">
+                    <div class="container">
+                        <h4><b>Shorty's Kebabs</b></h4>
+                        <p>5.0km away</p>
+                        <p>★☆☆☆☆</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <img src="https://source.unsplash.com/400x400/?pho" style="width:100%">
+                    <div class="container">
+                        <h4><b>Choy Boy's Ahoy</b></h4>
+                        <p>3.6km away</p>
+                        <p>★★★★★</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <img src="https://source.unsplash.com/400x400/?spaghetti" style="width:100%">
+                    <div class="container">
+                        <h4><b>Meme Mariner</b></h4>
+                        <p>12.1km away</p>
+                        <p>★★★★☆</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
