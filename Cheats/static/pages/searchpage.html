@@ -1,13 +1,19 @@
 <html>
     <header>
-        
+        <title>Search Result</title>
+        <script>
+            var searchBack = {{results|safe}};
+            //console.log(searchBack);
+        </script>
     </header>
     <body>
-        <h1> This is the search page</h1>
+        <h1>Cheat's</h1>
         <p id="searchPro">results should appear in this paragraph</p>
 
     </body>
     <footer>
+        <!--Js scripts from server side need to be included here are the render loads html and js from top down-->
+        <script src="{{url_for('static', filename='searchpage.js')}}"></script>
 
 
     </footer>

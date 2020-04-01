@@ -22,18 +22,24 @@ def landingPage():
 def search(searchterms):
     print(searchterms) #prints the terms passed from the index
     #return render_template('searchpage.html')
-    conn = sqlite3.connect(database)
+    conn = sqlite3.connect('database')
     cur1 = conn.cursor()
 
     cur1.execute(f"""
-    SELECT NAME FROM RESTAURANTS
-    WHERE NAME LIKE '%{searchtext}%'
+    SELECT DISTINCT NAME FROM RESTAURANTS
+    WHERE NAME LIKE '%{searchterms}%'
     ;
     """)
+    results = cur1.fetchall()
+    print('\n')
+    print(results)
+    print('\n')
+    
+    cond = []
+    for each in results:
+        cond.append(each[0])
 
-    for row in cur1.fetchall():
-        results += [row[0]]
-
+    results = json.dumps(cond)
     return render_template('searchpage.html', results=results)
 
 # #should be the actual comparison of the gig economy pricing
