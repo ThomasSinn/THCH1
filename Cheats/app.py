@@ -37,7 +37,9 @@ def search(searchterms):
     results = []
 
     for row in cur1.fetchall():
-        results += [row[0]]
+        results += [{
+            "name": row[0]
+        }]
 
     return render_template('searchpage.html', results=results)
 
