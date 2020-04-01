@@ -29,11 +29,11 @@ def compare():
 #database is also populated through this method
 @app.route('/GetDB', methods=['POST'])
 def dbOut(request):
-    return request.json('latitude')
+    print(request)
     content = request.json('latitude')
     print(content)
     #CreateLoc(content)
-    return ParseDB()
+    return request
 
 
 if __name__ == "__main__":
