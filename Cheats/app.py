@@ -16,6 +16,7 @@ def landingPage():
         searchtext = request.form.get("search")
     return render_template('index.html')
 
+
 #this route will produce a screen of cards which relate to the
 #search terms.
 @app.route('/search/<searchterms>')
@@ -23,6 +24,19 @@ def search(searchterms):
     print(searchterms) #prints the terms passed from the index
     #return render_template('searchpage.html')
     conn = sqlite3.connect(database)
+    cur1 = conn.cursor()
+
+    cur1.execute(f"""
+    SELECT NAME FROM RESTAURANTS
+    WHERE NAME LIKE '%{searchtext}%'
+    ;
+    """)
+
+    for row in cur1.fetchall():
+        results += [row[0]]
+
+    return render_template('searchpage.html', results=results)
+
     cur1 = conn.cursor()
 
     cur1.execute(f"""
@@ -57,5 +71,5 @@ def dbOut():
 #     return jsonify(result="find an island")
  
  
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
