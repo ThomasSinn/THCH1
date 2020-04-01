@@ -1,9 +1,12 @@
 #Python 3.7 controller 
 #uberch'eats project
 
+
 from flask import Flask, render_template, request
 from dbInterface import CreateLoc, ParseDB
 import json
+
+from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
 
 #Home Page
@@ -34,7 +37,14 @@ def dbOut():
     CreateLoc(content)
     print("about to return in dbOut")
     return ParseDB()
+
+
+
+@app.route('/shit', methods=['GET'])
+def tester():
+    print('TESTING')
+    return jsonify(result="find an island")
  
  
-if __name__ == "__main__":
+ if __name__ == "__main__":
     app.run()
