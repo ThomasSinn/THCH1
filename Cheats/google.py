@@ -9,7 +9,7 @@ import requests
 import shutil
 import random
 
-#global scope as it is used in multiple functions
+#google key -> global scope as it is used in multiple functions
 AUTH_KEY = "AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4"
 
 class locationOBJ:
@@ -53,8 +53,7 @@ def getrestuarants(locationobject):
 
 
 def InsertDB(JSONelement):
-    print(JSONelement)
-
+    #print(JSONelement)
     conn = sqlite3.connect('database')
     cursor = conn.cursor()
 
@@ -68,21 +67,6 @@ def InsertDB(JSONelement):
     conn.close()
 
 
-# def threadedUpdate(ResList):
-#     conn = sqlite3.connect('database')
-#     cursor = conn.cursor()
-
-#     print('\n threaded updater running\n ')
-#     #most dangerous way possible to manage a database, but she'll be right
-#     query = "INSERT INTO restuarants VALUES(%s, %s, %s)"
-    
-#     print(str(ResList[0]['name']), str(ResList[0]['opening_hours']['open_now']), str(getImages(ResList[0]['photopath'])))
-
-#     for each in ResList:
-#         #print(each['name'], each['opening_hours'])
-#         conn.execute(query, (str(each['name']), str(each['opening_hours']['open_now']), str(getImages(each['photopath']))))
-    
-#     return True
 
 #image download from 'places api' and saves them to photos folder
 #issue downloads empty images 
@@ -101,5 +85,24 @@ def getImages(googleItem):
 
 
 #gps coords for UNSW
+#need to get this from the front end
 testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
 getrestuarants(testobj)
+
+
+#code which may be integrated later on.
+# def threadedUpdate(ResList):
+#     conn = sqlite3.connect('database')
+#     cursor = conn.cursor()
+
+#     print('\n threaded updater running\n ')
+#     #most dangerous way possible to manage a database, but she'll be right
+#     query = "INSERT INTO restuarants VALUES(%s, %s, %s)"
+    
+#     print(str(ResList[0]['name']), str(ResList[0]['opening_hours']['open_now']), str(getImages(ResList[0]['photopath'])))
+
+#     for each in ResList:
+#         #print(each['name'], each['opening_hours'])
+#         conn.execute(query, (str(each['name']), str(each['opening_hours']['open_now']), str(getImages(each['photopath']))))
+    
+#     return True
