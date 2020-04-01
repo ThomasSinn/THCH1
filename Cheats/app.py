@@ -2,6 +2,8 @@
 #uberch'eats project
 
 from flask import Flask, render_template, request, redirect, url_for
+from dbInterface import CreateLoc, ParseDB
+import json
 import db
 
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
@@ -40,5 +42,17 @@ def searchPage(searchtext):
 def compare():
     return render_template('store.html')
 """
+
+#needs to be passed a jsonified geolocation
+#database is also populated through this method
+@app.route('/GetDB', methods=['POST'])
+def dbOut():
+    content = request.json
+    print(content)
+    CreateLoc(content)
+    print("about to return in dbOut")
+    return ParseDB()
+ 
+ 
 if __name__ == "__main__":
     app.run()

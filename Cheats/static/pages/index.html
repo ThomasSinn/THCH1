@@ -27,6 +27,8 @@
 
         <!--importing from a local file-->
         <!-- <script src = "C:/Users/Thomas Sinn/Documents/jquery-3.4.1.min.js"></script> -->
+        <!--Importing the google mirror of jquery and its assoicated libraries-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/439b7fb708.js" crossorigin="anonymous"></script>
 
         <!-- <script>window.jQuery || document.write('<script src="..\\jquery-3.4.1.min.js"></script>');</script> -->
@@ -35,15 +37,12 @@
         <meta name="viewport" content="width=device-width", initial-scale=1.0>
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://fonts.googleapis.com/css?family=Poppins" rel=stylesheet">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
         <title>Ch'eats</title>
     </head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <body>
-        <script src = "../scripts/script.js"></script>
-        <!-- CHECK IF thAT IS THAT RIGHT FILE LOCATIO ^^ -->
-
         <nav>
             <div class="logo">
                 <h4>Ch'eats</h4>
@@ -72,4 +71,9 @@
 
 
     </body>
+    <footer>
+        <!--Js scripts from server side need to be included here are the render loads html and js from top down-->
+        <script src="{{url_for('static', filename='index.js')}}"></script>
+
+    </footer>
 </html>
