@@ -5,13 +5,10 @@ function tryme() {
     alert('hello');
 };
 
+/*
 // make some ajax calls 
 $(document).ready(function() {
     //alert('damn')
-    /*$.getJSON('/shit'), {
-    }, function(data) {
-        $("#result").text(data.result);
-    }*/
     $.ajax({
         type: 'GET', 
         url: '/shit'
@@ -23,6 +20,25 @@ $(document).ready(function() {
         $('#result').text(data.result);
     });
 })
+*/
+
+$(document).ready(function() {
+    //alert('damn')
+    $.ajax({
+        type: 'GET', 
+        url: '/prices'
+    })
+    .done(function(data){
+        // alert('shit');
+        // document.write('shitfuckfuckingwork');
+        // document.write(data.result);
+        $('#result').text(data.result);
+    });
+})
+
+
+
+
 
 
 /*

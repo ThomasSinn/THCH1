@@ -40,7 +40,7 @@ CREATE TABLE gigPricing(
 def dbPrice():
     conn = sqlite3.connect('database')
     cur = conn.cursor()
-    cur.execute("SELECT * FROM gigPricing")
+    cur.execute("SELECT g.service, g.price, r.name FROM gigPricing g JOIN restaurants r on r.RID=g.RID group by name")
     result = cur.fetchall()
     conn.commit()
     result = json.dumps(result)
