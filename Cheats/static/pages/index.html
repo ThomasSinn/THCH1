@@ -26,7 +26,9 @@
         <!-- <script src = "//code.jquery.com/jquery-3.4.1.slim.min.js"></script> -->
 
         <!--importing from a local file-->
-        <script src = "C:/Users/Thomas Sinn/Documents/jquery-3.4.1.min.js"></script>
+        <!-- <script src = "C:/Users/Thomas Sinn/Documents/jquery-3.4.1.min.js"></script> -->
+        <!--Importing the google mirror of jquery and its assoicated libraries-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://kit.fontawesome.com/439b7fb708.js" crossorigin="anonymous"></script>
 
         <!-- <script>window.jQuery || document.write('<script src="..\\jquery-3.4.1.min.js"></script>');</script> -->
@@ -41,9 +43,6 @@
     </head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <body>
-        <script src = "../../script.js"></script>
-        <!-- CHECK IF thAT IS THAT RIGHT FILE LOCATIO ^^ -->
-
         <nav>
             <div class="logo">
                 <h4>Ch'eats</h4>
@@ -62,9 +61,9 @@
 
         <div class="bg">
             <div class="search-box">
-                <input class="search-txt" type="text" name="" size="30" placeholder="What would you like to eat?">
+                <input class="search-txt" type="text" name="" size="30" placeholder="What would you like to eat?" id='search-box'>
                 <a class="search-btn" href="#">
-                    <i class="fas fa-search icon-4x"></i>
+                    <i class="fas fa-search icon-4x" id="submit-search"></i>
                 </a>
             </div>
         </div>
@@ -72,4 +71,9 @@
 
 
     </body>
+    <footer>
+        <!--Js scripts from server side need to be included here are the render loads html and js from top down-->
+        <script src="{{url_for('static', filename='index.js')}}"></script>
+
+    </footer>
 </html>

@@ -20,6 +20,7 @@ class locationOBJ:
         self.range = range
 
 
+
 def getrestuarants(locationobject):
     #making the http request
     location = str(locationobject.latitude) + "," + str(locationobject.longtitude)
@@ -35,15 +36,30 @@ def getrestuarants(locationobject):
     jsonRaw = response.read()
     jsonData = json.loads(jsonRaw)
     #print(jsonData) 
-    
+
     impData = []
     for each in jsonData['results']:
-        impData.append({
-            "name" : each['name'].replace("'", "%27"),
-            "opening_hours" : each['opening_hours']['open_now'],
-            "photopath" : each['photos'][0]['photo_reference']
-        })
+        print(each)
+        print("\n")
 
+        name = each['name'].replace("'", "%27")
+        opening_hours = each['opening_hours']['open_now']
+
+        try:
+            photopath = each['photos'][0]['photo_reference']
+        except KeyError:
+            photopath = None
+        except NameError:
+            photopath = None
+        
+        impData.append({
+            "name" : name,
+            "opening_hours" : opening_hours,
+            "photopath" : photopath
+        })
+        
+
+       
     #include threading here later to prevent blocking function call. 
     #very ineffiecent atm
     for each in impData:
@@ -86,8 +102,8 @@ def getImages(googleItem):
 
 #gps coords for UNSW
 #need to get this from the front end
-testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
-getrestuarants(testobj)
+# testobj = locationOBJ(-33.917329664, 151.225332432, 2000) 
+# getrestuarants(testobj)
 
 
 #code which may be integrated later on.
