@@ -94,16 +94,17 @@ nav{
 .img-location {
     width: 400px;
     /* height scales with the width */
-    top: 50%;
+    top: 30%;
     left: 70%;
-    transform: translate(175%,60%);
+    transform: translate(175%,35%);
 }
 
 .location-title {
     display: flex;
     position: relative;
-    top: 120px;
+    top: 90px;
     left: 700px;
+    font-size: 20px;
 }
 
 .grid-wrapper img{
