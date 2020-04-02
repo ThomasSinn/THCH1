@@ -16,3 +16,4 @@ function makepost(data){
 
     feed.appendChild(newpost);
 }
+

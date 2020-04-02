@@ -29,7 +29,7 @@ def search(searchterms):
     cur1 = conn.cursor()
 
     cur1.execute(f"""
-    SELECT NAME FROM RESTAURANTS
+    SELECT NAME, PHOTOPATH FROM RESTAURANTS
     WHERE NAME LIKE '%{searchterms}%'
     ;
     """)
@@ -37,14 +37,17 @@ def search(searchterms):
     results = []
 
     for row in cur1.fetchall():
-        results += [row[0]]
+        results += [{
+            "name": row[0],
+            "photopath" : row[1]
+        }]
 
     return render_template('searchpage.html', results=results)
 
 # #should be the actual comparison of the gig economy pricing
-# @app.route('/store/<storeid>')
-# def compare():
-#     return render_template('comparepage.html')
+@app.route('/store/<storeid>')
+def compare(storeid):
+    return render_template('comparepage.html')
 
 
 @app.route('/prices', methods=['GET'])
