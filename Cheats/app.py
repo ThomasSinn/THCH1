@@ -45,9 +45,9 @@ def search(searchterms):
     return render_template('searchpage.html', results=results)
 
 # #should be the actual comparison of the gig economy pricing
-# @app.route('/store/<storeid>')
-# def compare():
-#     return render_template('comparepage.html')
+@app.route('/store/<storeid>')
+def compare(storeid):
+    return render_template('comparepage.html')
 
 
 @app.route('/prices', methods=['GET'])

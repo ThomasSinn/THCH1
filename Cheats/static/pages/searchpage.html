@@ -12,6 +12,7 @@
 
             .card:hover {
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+                cursor: pointer;
             }
 
             img {
@@ -54,18 +55,22 @@
         </style>
     </head>
     <body>
-        {% for i in results %}
-            <div class="column">
-                <div class="card">
-                    <img src="{{i.photopath}}" style="width:100%">
-                    <div class="container">
-                        <h4><b>{{i.name}}</b></h4>
-                        <p>0.3km away</p>
-                        <p>★★★☆☆</p>
+        <form method="POST", id="theform">
+            {% for i in results %}
+                <div class="column">
+                    <div class="card">
+                        <img src="{{i.photopath}}" style="width:100%">
+                        <div class="container">
+                            <h4><b>{{i.name}}</b></h4>
+                            <p>0.3km away</p>
+                            <p>★★★☆☆</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </form>
+
+        <script type="text/javascript" src = "../scripts/searchpage.js"></script>
     </body>
     <footer>
 

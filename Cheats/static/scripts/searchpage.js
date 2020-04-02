@@ -1,9 +1,10 @@
-window.onload(
-    //onload it should create the cards
+var x = document.getElementsByClassName("card");
 
-);
-
-
-function createcards(searchBack){
-
-};
+let i;
+for (i in x) {
+    try {
+    x[i].addEventListener("click", (event) => {
+        window.location.href = "/store/pizza"
+    });
+    } catch {}
+}
