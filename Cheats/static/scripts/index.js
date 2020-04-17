@@ -48,3 +48,13 @@ window.onload = function() {
 
     navigator.geolocation.getCurrentPosition(getLocation);
 }
+
+document.getElementById("home").href = location.origin;
+var a = str.concat(location.origin, '/about');
+console.log(a);
+let f = str.concat(location.origin, '/faq');
+let c = str.concat(location.origin, '/contact');
+document.getElementById("about").href = a;
+document.getElementById("faq").href = f;
+document.getElementById("contact").href = c;
+

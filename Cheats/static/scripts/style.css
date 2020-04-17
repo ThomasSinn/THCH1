@@ -20,6 +20,7 @@ nav{
 
 .logo{
     /*color: rgb(266,266,266); */
+    display: flex;
     color: black;
     text-transform: uppercase;
     float: left;
@@ -27,6 +28,10 @@ nav{
     align-content: center;
     letter-spacing: 5px;
     font-size: 20px;
+}
+
+.home{
+    text-decoration: none;
 }
 
 .nav-links{
@@ -90,3 +95,44 @@ nav{
     line-height: 40px;
 }
 
+.about-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgb(255, 255, 255);
+    height: 350px;
+    width: 700px;
+    border-radius: 40px;
+    padding: 10px;
+    text-align: center;
+}
+.contact-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgb(255, 255, 255);
+    height: 200px;
+    width: 700px;
+    border-radius: 40px;
+    padding: 10px;
+    text-align: center;
+}
+
+.about-text{
+    display: inline-block;
+}
+
+.faq-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: rgb(255, 255, 255);
+    height: 350px;
+    width: 700px;
+    border-radius: 40px;
+    padding: 10px;
+    text-align: center;
+}

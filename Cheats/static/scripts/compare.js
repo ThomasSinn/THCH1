@@ -1,5 +1,7 @@
 // This is a tester to try and convert html to JS
 
+document.getElementById("home").href = location.origin;
+
 function tryme() {
     // just to check if the files are linked properly 
     alert('hello');

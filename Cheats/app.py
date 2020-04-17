@@ -69,6 +69,23 @@ def dbOut():
 # def tester():
 #     print('TESTING')
 #     return jsonify(result="find an island")
+
+""" EXTRA PAGES """
+
+#About page
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
+    
+#FAQ page 
+@app.route('/faq', methods=['GET'])
+def faq():
+    return render_template('faq.html')
+
+#Contact us page 
+@app.route('/contact', methods=['GET'])
+def contact():
+    return render_template('contact.html')
  
  
 if __name__ == "__main__":
