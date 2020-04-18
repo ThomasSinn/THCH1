@@ -44,21 +44,20 @@
     <body>
         <nav>
             <div class="logo">
-                <a id="home" class="home" href="">CH'EATS</a>
+                <a id="home" class="home" href="{{ url_for('landingPage') }}">CH'EATS</a>
             </div>
             <ul class="nav-links">
                 <li>
-                    <a href="about">About</a>
+                    <a href="{{ url_for('about') }}">About</a>
                 </li>
                 <li>
-                    <a href="faq">FAQ</a>
+                    <a href="{{ url_for('faq') }}">FAQ</a>
                 </li>
                 <li>
-                    <a href="contact">Contact us</a>
+                    <a href="{{ url_for('contact') }}">Contact us</a>
                 </li>
             </ul>
-        </nav>
-        
+        </nav>    
         
         <div class="bg">
             <div class="faq-box">

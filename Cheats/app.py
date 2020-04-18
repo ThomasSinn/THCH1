@@ -18,6 +18,12 @@ def landingPage():
         return redirect(url_for('search', searchterms=searchtext))
     return render_template('index.html')
 
+@app.route('/index', methods=["GET", "POST"])
+def landingPage2():
+    if request.method == "POST":
+        searchtext = request.form.get("search")
+        return redirect(url_for('search', searchterms=searchtext))
+    return render_template('index.html')
 
 #this route will produce a screen of cards which relate to the
 #search terms.

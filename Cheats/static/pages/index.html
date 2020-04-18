@@ -45,21 +45,19 @@
     <body>
         <nav>
             <div class="logo">
-                <h4>Ch'eats</h4>
-
+                <a id="home" class="home" href="{{ url_for('landingPage') }}">CH'EATS</a>
             </div>
                 <li>
-                    <a id="about" href="">About</a>
+                    <a id="about" href="{{ url_for('about') }}">About</a>
                 </li>
                 <li>
-                    <a id="faq" href="">FAQ</a>
+                    <a id="faq" href="{{ url_for('faq') }}">FAQ</a>
                 </li>
                 <li>
-                    <a id="contact" href="">Contact us</a>
+                    <a id="contact" href="{{ url_for('contact') }}">Contact us</a>
                 </li>
             </ul>
         </nav>
-
         <div class="bg">
             <form method="POST">
                 <div class="search-box">
