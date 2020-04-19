@@ -28,11 +28,11 @@ def search(searchterms):
     conn = db.connect()
     cur1 = conn.cursor()
 
-    cur1.execute(f"""
+    cur1.execute("""
     SELECT NAME, PHOTOPATH FROM RESTAURANTS
-    WHERE NAME LIKE '%{searchterms}%'
+    WHERE NAME LIKE '%{}%'
     ;
-    """)
+    """.format(searchterms))
 
     results = []
 
