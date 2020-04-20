@@ -7,6 +7,7 @@
             body, html {
               height: 100%;
               margin: 0;
+              padding: 0;
             }
 
             .bg {
@@ -20,6 +21,11 @@
               background-position: center;
               background-repeat: no-repeat;
               background-size: cover;
+            }
+            #map{
+                height: 50%;
+                width: 50%;
+                float: right;
             }
         </style>
 
@@ -43,9 +49,13 @@
         <title>Ch'eats</title>
     </head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <body>
+    <body onload="updateInfo({{ result }})">
         <!-- <script src = "../../script.js"></script> -->
-        <!-- CHECK IF thAT IS THAT RIGHT FILE LOCATIO ^^ -->
+        <!--  CHECK IF thAT IS THAT RIGHT FILE LOCATIO ^^ -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='comparepage.css') }}">
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4&callback=initMap"
+        async defer></script>
+
 
         <nav>
             <div class="logo">
@@ -150,23 +160,10 @@
 
 
         </div>
-
-        <div id="result">
-            <!-- trying to work out flask The result should come into here-->
-
-        </div>
-
         
-        <div class="location">
-            <div class="location-title">
-                Location
-            </div>
-            <!-- <img class="img-location" src="../locationpics/Annotation 2020-03-31 133503.png" alt="location"> -->
-            <img class="img-location" src="{{ url_for('static', filename='ColosseumPizza.png') }}">
-        </div>
-
+        <div id="map"></div>
     </body>
     <footer>
-        <link rel="stylesheet" href="{{ url_for('static', filename='comparepage.css') }}">
+        
     </footer>
 </html>

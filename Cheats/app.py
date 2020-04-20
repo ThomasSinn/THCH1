@@ -55,7 +55,14 @@ def search(searchterms):
 @app.route('/store/<storeid>')
 def compare(storeid):
     print("storeID route hit: " + str(storeid))
-    return render_template('comparepage.html')
+    conn = db.connect()
+    cur = conn.cursor()
+    cur.execute("select * from restaurants where RID={}".format(int(storeid)))
+    result = cur.fetchall()
+    print("\n")
+    print(result)
+    print("\n")
+    return render_template('comparepage.html', storeInfo=result)
 
 
 @app.route('/prices', methods=['GET'])

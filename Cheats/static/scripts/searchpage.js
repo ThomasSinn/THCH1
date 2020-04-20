@@ -34,6 +34,7 @@ function populater(resResults){
 
         var dis = document.createElement('p');
         dis.innerText="Distance";
+        dis.setAttribute("id", each.id+"p")
         var rating = document.createElement('p');
         rating.innerText = "rating: " + each.rating;
 
@@ -71,12 +72,12 @@ function getDistance(resResults, userLocation){
         console.log(request)
         //document.getElementById(each.id).childNodes)[0].childNodes[1].childNodes[1].innerText
         $.post(request, function(data){
-            // var setter = document.getElementById(id).childNodes;
-            // var setter = (setter[0].childNodes)[1].childNodes[1];
-            //console.log(data.rows[0].elements[0].distance.text);
-            //console.log(setter)
-            document.getElementById(id).childNodes[0].childNodes[1].childNodes[1].nodeValue = data.rows[0].elements[0].distance.text;
-            console.log(document.getElementById(id).childNodes[0].childNodes[1].childNodes[1].nodeValue);
+
+            $(id+"p").replaceWith(data.rows[0].elements[0].distance.text);
+
+            //document.getElementById(id+'p').innerText = data.rows[0].elements[0].distance.text;
+            console.log(document.getElementById(id+'p'));
+            
         });
     };
 }
