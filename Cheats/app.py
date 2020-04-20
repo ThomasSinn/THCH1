@@ -2,6 +2,7 @@
 #uberch'eats project
 
 from flask import Flask, render_template, request, redirect, url_for
+#from flask_cors import CORS
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
 import json
@@ -9,6 +10,7 @@ import sqlite3
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
+#CORS(app)
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -29,17 +31,22 @@ def search(searchterms):
     cur1 = conn.cursor()
 
     cur1.execute(f"""
-    SELECT NAME, PHOTOPATH FROM RESTAURANTS
+    SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS
     WHERE NAME LIKE '%{searchterms}%'
     ;
     """)
 
     results = []
-
+    #needs to modified to include distance. 
     for row in cur1.fetchall():
+        #print(getDistance(row[4], row[5]))
         results += [{
             "name": row[0],
-            "photopath" : row[1]
+            "photopath" : row[1],
+            "id" : row[2],
+            "rating" : row[3],
+            "lat" : row[4],
+            "lng" : row[5]
         }]
 
     return render_template('searchpage.html', results=results)
@@ -47,6 +54,7 @@ def search(searchterms):
 # #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare(storeid):
+    print("storeID route hit: " + str(storeid))
     return render_template('comparepage.html')
 
 
