@@ -90,3 +90,21 @@ str = "item " + num;
 console.log(str);
 */
 
+var storeInfo;
+
+function updateInfo(info){
+    storeInfo = info;
+    console.log(info)
+}
+
+window.onload = function(){
+    initMap();
+}
+
+function initMap(){
+    var map;
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 8
+    });
+}
