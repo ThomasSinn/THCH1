@@ -1,5 +1,6 @@
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <style>
             body {
                 font-family: Arial, Helvetica, sans-serif;
@@ -54,26 +55,14 @@
 
         </style>
     </head>
-    <body>
+    <body onload="populater({{ results }})">
         <form method="POST", id="theform">
-            {% for i in results %}
-                <div class="column">
-                    <div class="card">
-                        <img src="{{i.photopath}}" style="width:100%">
-                        <div class="container">
-                            <h4><b>{{i.name}}</b></h4>
-                            <p>4.3km away</p>
-                            <p>★★★☆☆</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+           
         </form>
-
-        <script type="text/javascript" src = "../scripts/searchpage.js"></script>
+        
     </body>
     <footer>
-
+            <script type="text/javascript" src = "../scripts/searchpage.js"></script>
 
     </footer>
 </html>

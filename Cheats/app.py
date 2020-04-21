@@ -2,6 +2,7 @@
 #uberch'eats project
 
 from flask import Flask, render_template, request, redirect, url_for
+#from flask_cors import CORS
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
 import json
@@ -10,6 +11,7 @@ from exchange import get_exchange
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
+#CORS(app)
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -36,17 +38,22 @@ def search(searchterms):
     cur1 = conn.cursor()
 
     cur1.execute(f"""
-    SELECT NAME, PHOTOPATH FROM RESTAURANTS
+    SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS
     WHERE NAME LIKE '%{searchterms}%'
     ;
     """)
 
     results = []
-
+    #needs to modified to include distance. 
     for row in cur1.fetchall():
+        #print(getDistance(row[4], row[5]))
         results += [{
             "name": row[0],
-            "photopath" : row[1]
+            "photopath" : row[1],
+            "id" : row[2],
+            "rating" : row[3],
+            "lat" : row[4],
+            "lng" : row[5]
         }]
 
     return render_template('searchpage.html', results=results)
@@ -54,7 +61,15 @@ def search(searchterms):
 # #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare(storeid):
-    return render_template('comparepage.html')
+    print("storeID route hit: " + str(storeid))
+    conn = db.connect()
+    cur = conn.cursor()
+    cur.execute("select * from restaurants where RID={}".format(int(storeid)))
+    result = cur.fetchall()
+    print("\n")
+    print(result)
+    print("\n")
+    return render_template('comparepage.html', storeInfo=result)
 
 
 @app.route('/prices', methods=['GET'])
@@ -94,6 +109,36 @@ def faq():
 def contact():
     return render_template('contact.html')
  
+@app.route('/LocalRestaurants', methods=['GET'])
+def localrestaurants():
+    latitude = request.GET.get('lat')
+    longitude = request.GET.get('long')
+
+    data = {
+        {
+            name = "Burger Foods",
+            rating = 4,
+            latitude = latitude,
+            longitude = longitude,
+            photopath = "https://source.unsplash.com/400x400/?burger",
+            rid = 1015
+        }
+    }
+    return JsonResponse(data)
+
+@app.route('/GetMenu', methods=['GET'])
+def getmenu():
+    latitude = request.GET.get('rid')
+
+    data = {
+        {
+            name = "Hamburger",
+            costs = {
+                "ubereats" = 500,
+            }
+        }
+    }
+    return JsonResponse(data)
  
 if __name__ == "__main__":
     #getPrices()
