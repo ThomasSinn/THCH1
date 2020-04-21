@@ -3,3 +3,12 @@ these routes have been prewritten so that everyone can begin coding.
 The url noation '<value>' can be parsed using the requests library. When redirecting
 to these pages ensure that the all spaces and new lines characters are replaced with '%20'
 to avoid confusion. 
+
+
+!!!!!!!!
+important:
+you need to install flask-cors for the js request to work
+pip3 install flask-cors
+
+
+!!!!!!!!

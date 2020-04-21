@@ -3,9 +3,9 @@ CREATE TABLE restaurants(
     name varchar(255),
     open boolean NOT NULL,
     photoPath varchar(255),
-    rating integer,
-    latitude decimal(3, 7),
-    longitude decimal(3, 7)
+    rating float,
+    lat decimal(3, 7),
+    lng decimal(3, 7)
 );
 
 CREATE TABLE menuitems(

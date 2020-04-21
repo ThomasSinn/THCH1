@@ -13,6 +13,8 @@ from HelperFunction import FakeOrders
 #google key -> global scope as it is used in multiple functions
 AUTH_KEY = "AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4"
 
+location = ""
+
 class locationOBJ:
     #range is in meters
     def __init__(self, latitude, longtitude, range):
@@ -51,10 +53,16 @@ def getrestuarants(locationobject):
         except NameError:
             photopath = None
         
+        rating = each['rating']
+        location = each['geometry']['location']
+
         impData.append({
             "name" : name,
             "opening_hours" : opening_hours,
-            "photopath" : photopath
+            "photopath" : photopath,
+            "rating" : rating,
+            "lat" : location['lat'],
+            "lng" : location['lng']
         })
         
 
@@ -66,16 +74,16 @@ def getrestuarants(locationobject):
 
     return impData
 
-
+#needs to be modified to support more attributes(ratings and distance)
 def InsertDB(JSONelement):
     #print(JSONelement)
     conn = sqlite3.connect('database')
     cursor = conn.cursor()
 
-    print(("INSERT INTO restaurants VALUES({name}, {open}, {photo})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath']))
+    print(("INSERT INTO restaurants VALUES({name}, {open}, {photo}, {rating}, {lat}, {lng})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], rating=JSONelement['rating'], lat=JSONelement['lat'], lng=JSONelement['lng']))
 
     conn.execute(
-    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}')").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath']))
+    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}', {rating}, {lat}, {lng})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], rating=JSONelement['rating'], lat=JSONelement['lat'], lng=JSONelement['lng']))
     conn.commit()
     conn.close()
     print('gets through insert phase')
@@ -88,3 +96,21 @@ def InsertDB(JSONelement):
 def imageURL(refID):
     url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=800&photoreference=" + refID + "&key=" + AUTH_KEY
     return url
+
+#uses maps api to get the distance to the restaurant 
+# def getDistance(lat, lng):
+#     request = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metirc&origins="
+#     print("this is the location of the user" + location)
+#     modLoc = location
+
+#     modLoc = modLoc.replace("'", "|")
+#     request = request + modLoc
+#     request = request + "destinations=" + str(lat) + ',' + str(lng)
+#     request = request + "&key=" + AUTH_KEY
+#     print('\n')
+#     print('location query')
+#     print(request)
+
+#     response = urllib.request.urlopen(request)
+#     print(response)
+#     return response
