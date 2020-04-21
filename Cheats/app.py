@@ -116,12 +116,12 @@ def localrestaurants():
 
     data = {
         {
-            name = "Burger Foods",
-            rating = 4,
-            latitude = latitude,
-            longitude = longitude,
-            photopath = "https://source.unsplash.com/400x400/?burger",
-            rid = 1015
+            name : "Burger Foods",
+            rating : 4,
+            latitude : latitude,
+            longitude : longitude,
+            photopath : "https://source.unsplash.com/400x400/?burger",
+            rid : 1015
         }
     }
     return JsonResponse(data)
@@ -132,9 +132,9 @@ def getmenu():
 
     data = {
         {
-            name = "Hamburger",
-            costs = {
-                "ubereats" = 500,
+            name : "Hamburger",
+            costs : {
+                "ubereats" : 500,
             }
         }
     }
