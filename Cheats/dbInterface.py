@@ -70,5 +70,3 @@ def dbPrice():
     conn.commit()
     result = json.dumps(result)
     return diction
-
-
