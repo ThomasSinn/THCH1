@@ -134,5 +134,24 @@ nav{
     height: 50px;
     width: 80px;
     border-radius: 10px;
-  }
-  */
+}
+*/
+table td{
+    /*border:2px solid red;*/
+    background: white;
+    height: 50px;
+    width: 80px;
+    padding: 10px;
+    border-collapse: separate;
+}
+table {
+    margin:auto;
+}
+
+body log div img{
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+}

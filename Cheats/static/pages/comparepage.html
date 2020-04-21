@@ -48,6 +48,7 @@
 
         <title>Ch'eats</title>
     </head>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <body onload="updateInfo({{ result }})">
         <!-- <script src = "../../script.js"></script> -->
@@ -75,94 +76,106 @@
         </nav>
 
         <script type="text/javascript" src = "../scripts/compare.js"></script>
+        <div class="container"></div>
+        
+        <!--
 
-        <div class="grid-wrapper">
-            <!--<div class="logos">-->
-            <div class="grid-0">
-            </div>
-            <div class="ubereats">
-                <img class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
-                <!-- <img class="ubereatslogo" src="static/locationpics/5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png">
-                --> 
+            <div class="grid-wrapper">
+                
+                <div class="grid-0">
                 </div>
+                <div class="ubereats">
+                    <img class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
+ 
+                    </div>
+                <div class="doordash">
+                    <img class="ubereatslogo" src="{{ url_for('static', filename='Doordash.png') }}">
+                </div>
+                <div class="menulog">
+                    <img class="ubereatslogo" src="{{ url_for('static', filename='menulog.png') }}">
+                </div>
+                <div class="deliveroo">
+                    <img class="ubereatslogo" src="{{ url_for('static', filename='deliveroo.png') }}">
+                </div>
+
+                <div class="grid-17">
+                    Rocket Prosciutto 
+                </div>
+                <div class="grid-1">
+                    $14.5
+                </div>
+                <div class="grid-2">
+                    $15
+                </div>
+                <div class="grid-3">
+                    $13.5
+                </div>
+                <div class="grid-4">
+                    $16.2
+                </div>
+                <div class="grid-18">
+                    Pepperoni
+                </div>
+                <div class="grid-5">
+                    $15
+                </div>
+                <div class="grid-6">
+                    $18
+                </div>
+                <div class="grid-7">
+                    $16
+                </div>
+                <div class="grid-8">
+                    $12.5
+                </div>
+                <div class="grid-19">
+                    Pesto Chicken
+                </div>
+                <div class="grid-9">
+                    $19
+                </div>
+                <div class="grid-10">
+                    $11
+                </div>
+                <div class="grid-11">
+                    $8.9
+                </div>
+                <div class="grid-12">
+                    $10.6
+                </div>
+                <div class="grid-20">
+                    Hawaiian
+                </div>
+                <div class="grid-13">
+                    $11.5
+                </div>
+                <div class="grid-14">
+                    $12
+                </div>
+                <div class="grid-15">
+                    $13
+                </div>
+                <div class="grid-16">
+                    $11.9
+                </div>
+        
+            </div>
+        -->
+        <div id="map"></div>
+        <div id="TBL" class="log">
+            <div class="ubereats">
+                <img id="ubereatslogo" class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
+            </div>
             <div class="doordash">
-                 <!--<img class="doordashlogo" src="../locationpics/Doordash.png"> -->
-                <img class="ubereatslogo" src="{{ url_for('static', filename='Doordash.png') }}">
+                <img id="doordashlogo" class="doordashlogo" src="{{ url_for('static', filename='Doordash.png') }}">
             </div>
             <div class="menulog">
-                <!-- <img class="menuloglogo" src="../locationpics/menulog.png"> -->
-                <img class="ubereatslogo" src="{{ url_for('static', filename='menulog.png') }}">
+                <img id="menuloglogo" class="menuloglogo" src="{{ url_for('static', filename='menulog.png') }}">
             </div>
             <div class="deliveroo">
-                 <!-- <img class="deliveroologo" src="../locationpics/deliveroo.png"> -->
-                <img class="ubereatslogo" src="{{ url_for('static', filename='deliveroo.png') }}">
+                <img id="deliveroologo" class="deliveroologo" src="{{ url_for('static', filename='deliveroo.png') }}">
             </div>
-            <!--</div>-->
-            <div class="grid-17">
-                Rocket Prosciutto 
-            </div>
-            <div class="grid-1">
-                $14.5
-            </div>
-            <div class="grid-2">
-                $15
-            </div>
-            <div class="grid-3">
-                $13.5
-            </div>
-            <div class="grid-4">
-                $16.2
-            </div>
-            <div class="grid-18">
-                Pepperoni
-            </div>
-            <div class="grid-5">
-                $15
-            </div>
-            <div class="grid-6">
-                $18
-            </div>
-            <div class="grid-7">
-                $16
-            </div>
-            <div class="grid-8">
-                $12.5
-            </div>
-            <div class="grid-19">
-                Pesto Chicken
-            </div>
-            <div class="grid-9">
-                $19
-            </div>
-            <div class="grid-10">
-                $11
-            </div>
-            <div class="grid-11">
-                $8.9
-            </div>
-            <div class="grid-12">
-                $10.6
-            </div>
-            <div class="grid-20">
-                Hawaiian
-            </div>
-            <div class="grid-13">
-                $11.5
-            </div>
-            <div class="grid-14">
-                $12
-            </div>
-            <div class="grid-15">
-                $13
-            </div>
-            <div class="grid-16">
-                $11.9
-            </div>
-
-
         </div>
-        
-        <div id="map"></div>
     </body>
     <footer>
         

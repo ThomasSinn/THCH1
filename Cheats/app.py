@@ -67,14 +67,14 @@ def compare(storeid):
     cur.execute("select * from restaurants where RID={}".format(int(storeid)))
     result = cur.fetchall()
     print("\n")
-    print(result)
+    print('ACTUAL COMPARISON OF GIG ECONOMY PRICING',result)
     print("\n")
     return render_template('comparepage.html', storeInfo=result)
 
 
 @app.route('/prices', methods=['GET'])
 def getPrices():
-    print(dbPrice())
+    print('some fake prices from DBPRICE', dbPrice())
     return dbPrice()
 
 #needs to be passed a jsonified geolocation
