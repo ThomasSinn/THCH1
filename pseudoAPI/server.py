@@ -1,6 +1,7 @@
 #needs to be started using 'flask run --port 4888'
 import sys
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import urllib
 import sqlite3
 import json
@@ -8,6 +9,7 @@ import random
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/menuPricing/', methods=['GET'])
 def handler():
