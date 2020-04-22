@@ -1,6 +1,7 @@
 #needs to be started using 'flask run --port 4888'
 import sys
 from flask import Flask, request, jsonify
+import urllib
 import sqlite3
 import json
 import random
@@ -12,13 +13,18 @@ app = Flask(__name__)
 def handler():
     query_parameters = request.args
 
-    latitude = query_parameters.get('lat')
-    longitude = query_parameters.get('lng')
-    name = query_parameters.get('name')
+    try:
+        latitude = float(query_parameters.get('lat'))
+        longitude = float(query_parameters.get('lng'))
+    except:
+        pass
+    # name = query_parameters.get('name')
 
     cur = sqlite3.connect('API').cursor()
-    itemlist = cur.execute(f"SELECT name, service, price from food where r_lat = '{latitude}' AND r_lng = '{longitude}' AND r_name = '{name}'").fetchall()
-    return json.dumps(GenPriceService(itemlist))
+
+    itemlist = cur.execute(f"SELECT name, service, price from food where r_lat = '{latitude}' AND r_lng = '{longitude}'").fetchall()
+
+    return jsonify(GenPriceService(itemlist))
 
 
 def GenPriceService(ItemsList):
@@ -35,10 +41,10 @@ def GenPriceService(ItemsList):
 
     for i, k in itemsdict.items():
         services = []
-        for j, l in k:
-            services += {"service" : j, "price" : l}
+        for j, l in k.items():
+            services += [{"service" : j, "price" : l}]
 
-        itemsPrice += {"item" : i, "prices" : services}
+        itemsPrice += [{"item" : i, "prices" : services}]
     
     # itemsformat = []
     # for each in ItemsList:
