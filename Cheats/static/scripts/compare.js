@@ -186,11 +186,11 @@ const asyncCuisine = async function get_cuisine(r_id){
         return data;
     });
     console.log(res5);
+    asyncFuck(port, cuisine[0]);
 }
 asyncCuisine(r_id);
 
 let port = 5001;
-//let cuisine = "cafe";
 var prices = [];
 const asyncFuck = async function get_menu(port, cuisine){
     const res2 = await fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
@@ -204,7 +204,7 @@ const asyncFuck = async function get_menu(port, cuisine){
     });
     console.log(res2)
 }
-asyncFuck(port, cuisine);
+console.log(cuisine[0]);
 
 /*
 const main = (port, cuisine) => {
@@ -284,7 +284,7 @@ let change = 0;
 // if change = 1 then it has been changed before
 change_ex = (prices) => {
     var curr = document.getElementById("list").value;
-    /*
+    
     console.log("CHANGING THE PRICES");
     //location.reload(true);
     var ex_prices = [];
@@ -298,13 +298,14 @@ change_ex = (prices) => {
     change = 1;
     console.log("the changed prices are");
     console.log(prices);
-    return prices;
-    */
-    var p = 1; 
-    p = p *rates[curr];
     console.log(curr);
-    console.log(p);
-    return p;
+    return prices;
+    
+    //var p = 1; 
+    //p = p *rates[curr];
+    //console.log(curr);
+    //console.log(p);
+   //return p;
 }
 
                

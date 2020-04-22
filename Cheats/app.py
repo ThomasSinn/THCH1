@@ -11,7 +11,7 @@ from exchange import get_exchange
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
-#CORS(app)
+CORS(app)
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])

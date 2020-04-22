@@ -127,7 +127,7 @@ def imageURL(refID):
 #attempts to match keywords to the cuisine type
 def foodAssign(name):
     
-    cuisines = ['italian', 'chinese', 'indian', 'cafe']
+    cuisines = ['italian', 'Asian', 'indian', 'cafe']
 
     for each in cuisines:
         if each.lower() in name.lower():
