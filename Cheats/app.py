@@ -1,8 +1,8 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request, redirect, url_for
-#from flask_cors import CORS
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_cors import CORS
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
 import json
@@ -11,7 +11,7 @@ from exchange import get_exchange
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
-#CORS(app)
+CORS(app)
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -34,14 +34,20 @@ def landingPage2():
 def search(searchterms):
     print(searchterms) #prints the terms passed from the index
     #return render_template('searchpage.html')
+
+    searchkws = searchterms.split()
     conn = db.connect()
     cur1 = conn.cursor()
 
-    cur1.execute(f"""
-    SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS
-    WHERE NAME LIKE '%{searchterms}%'
-    ;
-    """)
+    where = ""
+
+    for kw in searchkws:
+        where += f"NAME LIKE '%{kw}%' AND "
+
+    if len(where) > 5:
+        where = where[:-5]
+
+    cur1.execute(f"""SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS WHERE {where}""")
 
     results = []
     #needs to modified to include distance. 
@@ -122,6 +128,7 @@ def faq():
 def contact():
     return render_template('contact.html')
  
+<<<<<<< HEAD
 @app.route('/LocalRestaurants', methods=['GET'])
 def localrestaurants():
     latitude = request.GET.get('lat')
@@ -191,6 +198,8 @@ def getStoreInfo():
 
 
 
+=======
+>>>>>>> 06262e3c3ea962f2e95822c701dc346b337ab010
 if __name__ == "__main__":
     #getPrices()
     get_exchange()

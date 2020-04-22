@@ -62,7 +62,7 @@ fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
 //console.log(obj)
 */
 
-
+/*
 let port = 5001;
 let cuisine = "cafe";
 //var prices = [];
@@ -84,10 +84,32 @@ const main = (port, cuisine) => {
     return result;
 }
 
+
 let prices = main(port, cuisine);
 console.log("Prices dict");
 console.log(prices);
+*/
 
+const asyncFuck2 = async () => {
+    const res3 = await fetch('http://api.exchangeratesapi.io/latest?base=AUD&symbols=USD,GBP,JPY,CNY,NZD,EUR',{
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        }
+    }).then((resp) => resp.json()).then((data) => {
+        return data;
+    });
+    console.log(res3)
+}
+
+const main2 = () => {
+    const result1 = asyncFuck2();
+    return result1;
+}
+
+let rates = main2();
+console.log("rates dict");
+console.log(rates);
 
 
 //This is the code for the boxes but not fully working so commented out 
