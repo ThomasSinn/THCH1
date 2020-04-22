@@ -7,7 +7,6 @@
               height: 100%;
               margin: 0;
             }
-
             .bg {
               /* The image used */
               background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://source.unsplash.com/featured/?food");
@@ -19,6 +18,22 @@
               background-position: center;
               background-repeat: no-repeat;
               background-size: cover;
+            }
+            .root{
+                display: flex;
+                width: 100%;
+                align-content: center;
+            }
+            .column {
+                flex: 1;
+                padding: 16px;
+                display: inline-block;
+                align-items: center;
+                position: relative;
+                vertical-align: middle;
+            }
+            .images {
+                height: 400px;
             }
         </style>
 
@@ -37,7 +52,7 @@
         <meta name="viewport" content="width=device-width", initial-scale=1.0>
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css">
 
         <title>Ch'eats</title>
     </head>
@@ -47,16 +62,17 @@
             <div class="logo">
                 <a id="home" class="home" href="{{ url_for('landingPage') }}">CH'EATS</a>
             </div>
-                <li>
-                    <a id="about" href="{{ url_for('about') }}">About</a>
-                </li>
-                <li>
-                    <a id="faq" href="{{ url_for('faq') }}">FAQ</a>
-                </li>
-                <li>
-                    <a id="contact" href="{{ url_for('contact') }}">Contact us</a>
-                </li>
-            </ul>
+                <ul class="nav-links">
+                    <li>
+                        <a id="about" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li>
+                        <a id="faq" href="{{ url_for('faq') }}">FAQ</a>
+                    </li>
+                    <li>
+                        <a id="contact" href="{{ url_for('contact') }}">Contact us</a>
+                    </li>
+                </ul>
         </nav>
         <div class="bg">
             <form method="POST">

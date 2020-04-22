@@ -5,7 +5,8 @@ CREATE TABLE restaurants(
     photoPath varchar(255),
     rating float,
     lat decimal(3, 7),
-    lng decimal(3, 7)
+    lng decimal(3, 7),
+    cuisine varchar(60)
 );
 
 CREATE TABLE menuitems(

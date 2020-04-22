@@ -72,11 +72,11 @@ function getDistance(resResults, userLocation){
         console.log(request)
         //document.getElementById(each.id).childNodes)[0].childNodes[1].childNodes[1].innerText
         $.post(request, function(data){
-
+            console.log(data)
             $(id+"p").replaceWith(data.rows[0].elements[0].distance.text);
 
             //document.getElementById(id+'p').innerText = data.rows[0].elements[0].distance.text;
-            console.log(document.getElementById(id+'p'));
+            //console.log(document.getElementById(id+'p'));
             
         });
     };

@@ -107,6 +107,7 @@ function createPrevious(ids){
         var imgsrc = document.createElement('img');
         imgsrc.setAttribute('src', each.photopath);
         imgsrc.setAttribute('style', 'width:100%');
+        imgsrc.setAttribute('class', 'images');
         cardDiv.appendChild(imgsrc);
         var container = document.createElement('div');
         container.setAttribute('class', 'container');
