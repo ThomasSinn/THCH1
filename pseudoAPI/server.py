@@ -1,11 +1,14 @@
 #needs to be started using 'flask run --port 4888'
 import sys
 from flask import Flask
+from flask_cors import CORS
 import sqlite3
 import json
 import random
 
+
 app = Flask(__name__)
+CORS(app)
 
 #returns pricing of cuisine for each service. 
 @app.route('/menuPricing/<cuisine>')
