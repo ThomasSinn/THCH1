@@ -1,10 +1,42 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
         <style>
             body {
                 font-family: Arial, Helvetica, sans-serif;
             }
+            nav{
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                min-height: 8vh;
+                background-color: lightgrey;
+                /*font-family: 'Poppins', sans-serif; */
+                font-family:'Avenir LT W01 85 Heavy';
+            }    
+            .nav-links{
+                display: flex;
+                float: right;
+                justify-content: space-around;
+                align-items: center;
+                align-content: center;
+                width: 30%;
+            }
+
+            .nav-links li{
+                list-style: none;
+            }
+
+            .nav-links a{
+                /*color: rgb(266,266,266);*/
+                color: black; 
+                text-decoration: none;
+                letter-spacing: 3px;
+                font-weight: bold;
+                font-size: 14px; 
+            }
+            
             .card {
                 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
                 transition: 0.3s;
@@ -18,17 +50,19 @@
 
             img {
                 border-radius: 5px 5px 0 0;
+                height: 30%
             }
 
             .container {
+                /* Text container */
                 padding: 2px 16px;
             }
 
             /* Float four columns side by side */
             .column {
                 float: left;
-                width: 45%;
-                padding: 20 20px;
+                width: 22%;
+                padding: 10 10px;
             }
 
             /* Remove extra left and right margins, due to padding */
@@ -47,7 +81,7 @@
             /* Responsive columns */
             @media screen and (max-width: 300) {
                 .column {
-                    width: 100%;
+                    width: 50%;
                     display: block;
                     margin-bottom: 20px;
                 }
@@ -56,10 +90,27 @@
         </style>
     </head>
     <body onload="populater({{ results }})">
+              
+        <nav>
+            <div class="logo">
+                <a id="home" class="home" href="{{ url_for('landingPage') }}">CH'EATS</a>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="{{ url_for('about') }}">About</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('faq') }}">FAQ</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('contact') }}">Contact us</a>
+                </li>
+            </ul>
+        </nav>
+
         <form method="POST", id="theform">
            
         </form>
-        
     </body>
     <footer>
             <script type="text/javascript" src = "../scripts/searchpage.js"></script>
