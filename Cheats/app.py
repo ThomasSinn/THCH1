@@ -153,6 +153,44 @@ def getmenu():
     }
     return JsonResponse(data)
  
+#Route for index.js ajax call. 
+@app.route('/getInfo', methods=['POST'])
+def getStoreInfo():
+    resList = request.json
+    print('\n')
+    print(resList)
+    print('\n')
+    resList = resList['ids']
+    conn = db.connect()
+    cur = conn.cursor()
+    formattedList = []
+    scannedIDs = []
+    for each in resList:
+        result = cur.execute("select * from restaurants where Rid={id}".format(id=each)).fetchone()
+        if result[0] not in scannedIDs:
+            resDict = {
+                "id" : result[0],
+                "name" : result[1],
+                "open" : result[2],
+                "photopath" : result[3],
+                "rating" : result[4],
+                "lat" : result[5],
+                "lng" : result[6]
+            }
+            formattedList.append(resDict)
+            scannedIDs.append(result[0])
+    print('\n')
+    print(formattedList)
+    print('\n')
+    formattedList = json.dumps(formattedList)
+    return formattedList
+    
+        
+
+
+
+
+
 if __name__ == "__main__":
     #getPrices()
     get_exchange()

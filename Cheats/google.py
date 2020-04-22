@@ -80,6 +80,12 @@ def InsertDB(JSONelement):
     conn = sqlite3.connect('database')
     cursor = conn.cursor()
 
+    #prevents double entries by searching database to see if the retuarant is already in the database
+    if(len(cursor.execute("Select RID from Restaurants where name LIKE '{name}' AND lat={lat} AND lng={lng}".format(name=JSONelement['name'], lat=JSONelement['lat'], lng=JSONelement['lng'])).fetchone()) == 0):
+        print("duplicate found not adding to database")
+        return
+
+
     print(("INSERT INTO restaurants VALUES({name}, {open}, {photo}, {rating}, {lat}, {lng})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], rating=JSONelement['rating'], lat=JSONelement['lat'], lng=JSONelement['lng']))
 
     conn.execute(
