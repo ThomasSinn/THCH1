@@ -50,12 +50,11 @@
     </head>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <body onload="updateInfo({{ result }})">
+    <body>
+        
         <!-- <script src = "../../script.js"></script> -->
         <!--  CHECK IF thAT IS THAT RIGHT FILE LOCATIO ^^ -->
         <link rel="stylesheet" href="{{ url_for('static', filename='comparepage.css') }}">
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4&callback=initMap"
-        async defer></script>
 
 
         <nav>
@@ -176,6 +175,26 @@
                 <img id="deliveroologo" class="deliveroologo" src="{{ url_for('static', filename='deliveroo.png') }}">
             </div>
         </div>
+        
+        <div id="map"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4&callback=initMap"
+        async defer></script>
+        <script>
+            var map;
+            var info = {{storeInfo|tojson}};
+            console.log(info);
+            info = JSON.parse(info)
+            var resturant = {lat : info.lat, lng : info.lng};
+            console.log(resturant);
+            function initMap() {
+                console.log()
+                map = new google.maps.Map(document.getElementById('map'), {
+                center: resturant,
+                zoom: 20
+                });
+            }
+        </script>
+        
     </body>
     <footer>
         

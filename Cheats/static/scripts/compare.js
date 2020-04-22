@@ -223,20 +223,25 @@ window.onload = function() {
         }
     }
     body.appendChild(table)
-    initMap();
+    //initMap();
 }
 
-var storeInfo;
+// function updateInfo(info){
+//     info = JSON.parse(info)
+//     console.log(info)
+//     return info
+// }
 
-function updateInfo(info){
-    storeInfo = info;
-    console.log(info)
-}
+// // window.onload = function(){
+// //     initMap();
+// // }
 
-function initMap(){
-    var map;
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 8
-    });
-}
+// function initMap(store){
+//     var map;
+//     console.log(store)
+//     //console.log(storeInfo.lat + " " + storeInfo.lng)
+//     map = new google.maps.Map(document.getElementById('map'), {
+//         center: {lat: -34.397, lng: 150.644},
+//         zoom: 8
+//     });
+// }

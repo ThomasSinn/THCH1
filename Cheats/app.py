@@ -52,8 +52,8 @@ def search(searchterms):
             "photopath" : row[1],
             "id" : row[2],
             "rating" : row[3],
-            "lat" : row[4],
-            "lng" : row[5]
+            "lat" : float(row[4]),
+            "lng" : float(row[5])
         }]
 
     return render_template('searchpage.html', results=results)
@@ -65,11 +65,24 @@ def compare(storeid):
     conn = db.connect()
     cur = conn.cursor()
     cur.execute("select * from restaurants where RID={}".format(int(storeid)))
-    result = cur.fetchall()
+    result = cur.fetchone()
     print("\n")
     print('ACTUAL COMPARISON OF GIG ECONOMY PRICING',result)
     print("\n")
-    return render_template('comparepage.html', storeInfo=result)
+
+    #formatting info to make it more usable for js
+    resDict = {
+        "id" : result[0],
+        "name" : result[1],
+        "open" : result[2],
+        "photopath" : result[3],
+        "rating" : result[4],
+        "lat" : result[5],
+        "lng" : result[6]
+    }
+    # resdict = json.dumps(resDict)
+    # print(resDict)
+    return render_template('comparepage.html', storeInfo=json.dumps(resDict))
 
 
 @app.route('/prices', methods=['GET'])
