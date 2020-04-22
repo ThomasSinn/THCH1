@@ -1,79 +1,3 @@
-<<<<<<< HEAD
-<DOCTYPE! html>
-
-<html lang="en">
-    <head>
-        <style>
-            body, html {
-              height: 100%;
-              margin: 0;
-            }
-
-            .bg {
-              /* The image used */
-              background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://source.unsplash.com/featured/?food");
-
-              /* Full height */
-              height: 100%;
-
-              /* Center and scale the image nicely */
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: cover;
-            }
-        </style>
-
-        <!-- // importing the library from code.jquery.com using their CDN's -->
-        <script src = "//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-
-        <!--importing from a local file-->
-        <!-- <script src = "C:/Users/Thomas Sinn/Documents/jquery-3.4.1.min.js"></script> -->
-        <!--Importing the google mirror of jquery and its assoicated libraries-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://kit.fontawesome.com/439b7fb708.js" crossorigin="anonymous"></script>
-
-        <!-- <script>window.jQuery || document.write('<script src="..\\jquery-3.4.1.min.js"></script>');</script> -->
-
-        <meta charset = "UTF-8">
-        <meta name="viewport" content="width=device-width", initial-scale=1.0>
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="https://fonts.googleapis.com/css?family=Poppins" rel=stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-        <title>Ch'eats</title>
-    </head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <body>
-        <nav>
-            <div class="logo">
-                <a id="home" class="home" href="{{ url_for('landingPage') }}">CH'EATS</a>
-            </div>
-                <li>
-                    <a id="about" href="{{ url_for('about') }}">About</a>
-                </li>
-                <li>
-                    <a id="faq" href="{{ url_for('faq') }}">FAQ</a>
-                </li>
-                <li>
-                    <a id="contact" href="{{ url_for('contact') }}">Contact us</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="bg">
-            <form method="POST">
-                <div class="search-box">
-                    <input class="search-txt" type="text" name="search" size="30" placeholder="What would you like to eat?">
-                    <input class="search-btn" type="image" name="button" id="submit-search" src="https://img.icons8.com/pastel-glyph/64/000000/search.png">
-                </div>
-            </form>
-        </div>
-    </body>
-    <footer>
-        <!--Js scripts from server side need to be included here are the render loads html and js from top down-->
-        <script src="{{url_for('static', filename='index.js')}}"></script>
-
-    </footer>
-=======
 <DOCTYPE! html>
 
 <html lang="en">
@@ -151,5 +75,4 @@
         <script src="{{url_for('static', filename='index.js')}}"></script>
 
     </footer>
->>>>>>> master
 </html>
