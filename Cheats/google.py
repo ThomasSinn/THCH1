@@ -83,7 +83,7 @@ def InsertDB(JSONelement):
     print(("INSERT INTO restaurants VALUES({name}, {open}, {photo}, {rating}, {lat}, {lng})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], rating=JSONelement['rating'], lat=JSONelement['lat'], lng=JSONelement['lng']))
 
     conn.execute(
-    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}', {rating}, {lat}, {lng})").format(name=JSONelement['name'], open=JSONelement['opening_hours'], photo=JSONelement['photopath'], rating=JSONelement['rating'], lat=JSONelement['lat'], lng=JSONelement['lng']))
+    ("INSERT INTO restaurants VALUES(NULL, '{name}', {open}, '{photo}', {rating}, {lat}, {lng})").format(name=JSONelement['name'], open=int(JSONelement['opening_hours']), photo=JSONelement['photopath'], rating=JSONelement['rating'], lat=JSONelement['lat'], lng=JSONelement['lng']))
     conn.commit()
     conn.close()
     print('gets through insert phase')
