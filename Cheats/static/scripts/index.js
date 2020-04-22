@@ -63,7 +63,7 @@ window.onload = function() {
             }),
             success: function(msg){
                 createPrevious(JSON.parse(msg));
-                alert("previous created");
+                //alert("previous created");
             }
         });
 
