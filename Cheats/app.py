@@ -90,6 +90,14 @@ def compare(storeid):
     # print(resDict)
     return render_template('comparepage.html', storeInfo=json.dumps(resDict))
 
+@app.route('/ridlatlong/<rid>')
+def getLatLong(rid):
+    conn = db.connect()
+    cur = conn.cursor()
+    cur.execute("select lat, lng from restaurants where RID={}".format(int(rid)))
+    result = cur.fetchone()
+    cur.close()
+    return jsonify({"lat" : result[0], "lng" : result[1]})
 
 @app.route('/prices', methods=['GET'])
 def getPrices():
