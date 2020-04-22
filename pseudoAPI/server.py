@@ -36,7 +36,7 @@ def GenPriceService(ItemsList):
     for i, k in itemsdict.items():
         services = []
         for j, l in k:
-            services += {"service" : j, "price" : k}
+            services += {"service" : j, "price" : l}
 
         itemsPrice += {"item" : i, "prices" : services}
     
