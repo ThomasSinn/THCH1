@@ -47,7 +47,7 @@ def search(searchterms):
     if len(where) > 5:
         where = where[:-5]
 
-    cur1.execute(f"""SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS WHERE {where}""")
+    cur1.execute(f"""SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM restaurants WHERE {where}""")
 
     results = []
     #needs to modified to include distance. 
