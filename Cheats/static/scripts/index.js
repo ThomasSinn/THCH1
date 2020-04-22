@@ -101,8 +101,8 @@ function createPrevious(ids){
         each = ids[i]
         var mainDiv = document.createElement('div');
         mainDiv.setAttribute('class', "column");
-        mainDiv.setAttribute('id', each.id)
-        var cardDiv = document.createElement('div')
+        mainDiv.setAttribute('id', each.id);
+        var cardDiv = document.createElement('div');
         cardDiv.setAttribute('class', 'card');
         var imgsrc = document.createElement('img');
         imgsrc.setAttribute('src', each.photopath);
