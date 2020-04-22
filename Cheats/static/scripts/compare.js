@@ -89,7 +89,106 @@ let prices = main(port, cuisine);
 console.log("Prices dict");
 console.log(prices);
 */
+/* CHANGE THIS ONE FOR THE NEW API */
+/*
+let port = 5001;
+let cuisine = "cafe";
+//var prices = [];
+var url = window.location.href;
+var n = url.indexOf("/store/");
+var r_id = parseInt(url.substring(n + 7));
+console.log(url);
 
+var latlong = {}; // object of the lat and longitude 
+const get_lat = async function lat(rid){
+    const res6 = await fetch(`http://127.0.0.1:5000/ridlatlong/${r_id}`,{
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        }
+    }).then((resp) => resp.json()).then((data) => {
+        prices = data;
+        return data;
+    });
+    console.log(res6)
+    latlong = res6;
+    latlong.lat = String(latlong.lat);
+    latlong.lng = String(latlong.lng);
+    latlong.lat = latlong.lat.replace(".", "%2E");
+    latlong.lng = latlong.lng.replace(".","%2E");
+    console.log(latlong.lng)
+    get_menus(latlong);
+}
+
+const main6 = (r_id) => {
+    const result = get_lat(r_id);
+    return result;
+}
+
+var coord = main6(r_id);
+console.log("co-ords dict");
+console.log(coord);
+
+var menu_items = {};
+const get_menus = async function menus(latlong) {
+    const menu_f = await fetch(`http://127.0.0.1:5001/menuPricing/?lat=${latlong.lat}&lng=${latlong.lng}`, {
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        }
+    }).then((resp) => resp.json()).then((data) => {
+        return data;
+    });
+    console.log(menu_f);
+    menu_items = menu_f;
+}
+*/
+/*
+const main7 = (latlong) => {
+    const result = get_menus(latlong);
+    return result;
+}
+*/
+/*
+var m = main7(latlong);
+console.log("menu items");
+console.log(m);
+*/
+
+/*
+var menu_url = new URL(),
+    params = {lat:35.696233, long:139.570431}
+Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+fetch(url).then()
+*/
+
+var prices = [];
+const asyncFuck = async function get_menu(port, cuisine){
+    const res2 = await fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        }
+    }).then((resp) => resp.json()).then((data) => {
+        prices = data;
+        return data;
+    });
+    console.log(res2)
+    asyncFuck(port, cuisine);
+}
+/*
+const main = (port, cuisine) => {
+    const result = asyncFuck(port, cuisine);
+    return result;
+}
+
+
+var prices = main(port, cuisine);
+console.log("Prices dict");
+console.log(prices);
+*/
+
+/*
 const asyncFuck2 = async () => {
     const res3 = await fetch('http://api.exchangeratesapi.io/latest?base=AUD&symbols=USD,GBP,JPY,CNY,NZD,EUR',{
         headers: {
@@ -110,67 +209,80 @@ const main2 = () => {
 let rates = main2();
 console.log("rates dict");
 console.log(rates);
-
-
-//This is the code for the boxes but not fully working so commented out 
-/*
-const container = document.getElementById("container");
-
-function makeRows(rows, cols) {
-    container.style.setProperty('--grid-rows', rows);
-    container.style.setProperty('--grid-cols', cols);
-    for (c = 0; c < (rows * cols); c++) {
-        let cell = document.createElement("div");
-        cell.innerText = (c + 1);
-        container.appendChild(cell).className = "grid-item";
-        if (c+1 == 1) {
-            cell.innerHTML = "";
-            cell.style.border = "none";
+*/
+var rates = {};
+const asyncFuck2 = async () => {
+    const res3 = await fetch('http://127.0.0.1:5000/exchange',{
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
         }
-        if (c+1 == 2) {
-            var ubereatslogo = document.createElement("img");
-            ubereatslogo.setAttribute("src", "../locationpics/5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png");
-        // cell.appendChild("ubereatslogo");
+    }).then((resp) => resp.json()).then((data) => {
+        return data;
+    });
+    console.log('inside the async');
+    console.log(res3);
+    asyncFuck2();
+    rates = res3;
+}
+console.log('outside async');
+console.log(rates);
+
+//console.log(rates);
+/*
+const main2 = () => {
+    const result1 = asyncFuck2();
+    return result1;
+}
+
+rates1 = main2();
+console.log("rates dict");
+console.log(rates1);
+*/
+
+
+/* 
+change the exchange rate 
+*/ 
+/* NOW WE HAVE THE EXCHANGE RATES AND THE PRICES 
+we need to make a click button maybe in the nav bar dropdown menu? to change the prices
+
+*/
+let change = 0;
+
+// if change = 1 then it has been changed before
+change_ex = (prices) => {
+    var curr = document.getElementById("list").value;
+    /*
+    console.log("CHANGING THE PRICES");
+    //location.reload(true);
+    var ex_prices = [];
+    // multiply the prices dictionary 
+    for (i=0;i<length(prices);i++) {
+        let p_list = prices[i]["prices"];
+        for (j=0; j < length(p_list); j++) {
+            prices[i]["prices"][j]["price"] = prices[i]["prices"][j]["price"] * rates[curr];
+        }
     }
-    if (c+1 == 7|| c+1 == 12 || c+1 == 17 || c+1 == 22) {
-        cell.style.border = "solid black";
-    }
-    if (c+1 == 8|| c+1 == 13 || c+1 == 18 || c+1 == 23) {
-        cell.style.border = "solid red";
-    }
-    if (c+1 == 9|| c+1 == 14 || c+1 == 19 || c+1 == 24) {
-        cell.style.border = "solid green";
-    }    
-    if (c+1 == 10|| c+1 == 15 || c+1 == 20 || c+1 == 25) {
-        cell.style.border = "solid blue";
-    }
-};
-};
+    change = 1;
+    console.log("the changed prices are");
+    console.log(prices);
+    return prices;
+    */
+    var p = 1; 
+    p = p *rates[curr];
+    console.log(curr);
+    console.log(p);
+    return p;
+}
 
-makeRows(5, 5);
-
-
-
-<div class="ubereats">
-<img class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
-
-</div>
-<div class="doordash">
-<img class="ubereatslogo" src="{{ url_for('static', filename='Doordash.png') }}">
-                </div>
-                <div class="menulog">
-                <img class="ubereatslogo" src="{{ url_for('static', filename='menulog.png') }}">
-                </div>
-                <div class="deliveroo">
-                <img class="ubereatslogo" src="{{ url_for('static', filename='deliveroo.png') }}">
-                </div>
-                */
                
 function set_image(parent, url) { 
     var img = new Image(); 
     img.src = url; 
     parent.appendChild(img);   
 }  
+
 window.onload = function() {
     var body = document.getElementById("TBL");
     var table = document.createElement('TABLE');

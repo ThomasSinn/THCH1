@@ -1,192 +1,3 @@
-<<<<<<< HEAD
-<DOCTYPE! html>
-<!-- COMPAING THE RESTAURANTS-->
-
-<html lang="en">
-    <head>
-        <style>
-            body, html {
-              height: 100%; 
-              margin: 0;
-              padding: 0;
-            }
-
-            .bg {
-              /* The image used */
-              background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("https://source.unsplash.com/featured/?food");
-
-              /* Full height */
-              height: 100%;
-
-              /* Center and scale the image nicely */
-              background-position: center;
-              background-repeat: no-repeat;
-              background-size: cover;
-            }
-            #map{
-                height: 50%;
-                width: 50%;
-                float: right;
-            }
-        </style>
-
-        <!-- // importing the library from code.jquery.com using their CDN's -->
-        <script src = "//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-
-        <!--importing from a local file-->
-        <!-- <script src = "C:/Users/Thomas Sinn/Documents/jquery-3.4.1.min.js"></script> -->
-        <script src="https://kit.fontawesome.com/439b7fb708.js" crossorigin="anonymous"></script>
-
-        <!-- <script>window.jQuery || document.write('<script src="..\\jquery-3.4.1.min.js"></script>');</script> -->
-
-        <meta charset = "UTF-8">
-        <meta name="viewport" content="width=device-width", initial-scale=1.0>
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link href="https://fonts.googleapis.com/css?family=Poppins" rel=stylesheet>
-        <!-- <link rel="stylesheet" href="comparepage.css"> -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-        <title>Ch'eats</title>
-    </head>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <body onload="updateInfo({{ result }})">
-        <!-- <script src = "../../script.js"></script> -->
-        <!--  CHECK IF thAT IS THAT RIGHT FILE LOCATIO ^^ -->
-        <link rel="stylesheet" href="{{ url_for('static', filename='comparepage.css') }}">
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4&callback=initMap"
-        async defer></script>
-
-
-        <nav>
-            <div class="logo">
-                <a id="home" class="home" href="{{ url_for('landingPage') }}">CH'EATS</a>
-            </div>
-            <ul class="nav-links">
-                <li>
-                    <a href="{{ url_for('about') }}">About</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('faq') }}">FAQ</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('contact') }}">Contact us</a>
-                </li>
-            </ul>
-        </nav>
-
-        <script type="text/javascript" src = "../scripts/compare.js"></script>
-        <div class="container"></div>
-        
-        <!--
-
-            <div class="grid-wrapper">
-                
-                <div class="grid-0">
-                </div>
-                <div class="ubereats">
-                    <img class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
- 
-                    </div>
-                <div class="doordash">
-                    <img class="ubereatslogo" src="{{ url_for('static', filename='Doordash.png') }}">
-                </div>
-                <div class="menulog">
-                    <img class="ubereatslogo" src="{{ url_for('static', filename='menulog.png') }}">
-                </div>
-                <div class="deliveroo">
-                    <img class="ubereatslogo" src="{{ url_for('static', filename='deliveroo.png') }}">
-                </div>
-
-                <div class="grid-17">
-                    Rocket Prosciutto 
-                </div>
-                <div class="grid-1">
-                    $14.5
-                </div>
-                <div class="grid-2">
-                    $15
-                </div>
-                <div class="grid-3">
-                    $13.5
-                </div>
-                <div class="grid-4">
-                    $16.2
-                </div>
-                <div class="grid-18">
-                    Pepperoni
-                </div>
-                <div class="grid-5">
-                    $15
-                </div>
-                <div class="grid-6">
-                    $18
-                </div>
-                <div class="grid-7">
-                    $16
-                </div>
-                <div class="grid-8">
-                    $12.5
-                </div>
-                <div class="grid-19">
-                    Pesto Chicken
-                </div>
-                <div class="grid-9">
-                    $19
-                </div>
-                <div class="grid-10">
-                    $11
-                </div>
-                <div class="grid-11">
-                    $8.9
-                </div>
-                <div class="grid-12">
-                    $10.6
-                </div>
-                <div class="grid-20">
-                    Hawaiian
-                </div>
-                <div class="grid-13">
-                    $11.5
-                </div>
-                <div class="grid-14">
-                    $12
-                </div>
-                <div class="grid-15">
-                    $13
-                </div>
-                <div class="grid-16">
-                    $11.9
-                </div>
-        
-            </div>
-        -->
-        <div id="map"></div>
-        <div id="TBL" class="log">
-            <div class="ubereats">
-                <img id="ubereatslogo" class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
-            </div>
-            <div class="doordash">
-                <img id="doordashlogo" class="doordashlogo" src="{{ url_for('static', filename='Doordash.png') }}">
-            </div>
-            <div class="menulog">
-                <img id="menuloglogo" class="menuloglogo" src="{{ url_for('static', filename='menulog.png') }}">
-            </div>
-            <div class="deliveroo">
-                <img id="deliveroologo" class="deliveroologo" src="{{ url_for('static', filename='deliveroo.png') }}">
-            </div>
-            <a id="uber"></a>
-            <a id="door"></a>
-            <a id="menu"></a>
-            <a id="deli"></a>
-
-        </div>
-    </body>
-    <footer>
-        
-    </footer>
-=======
 <DOCTYPE! html>
 <!-- COMPAING THE RESTAURANTS-->
 
@@ -260,6 +71,15 @@
                 <li>
                     <a href="{{ url_for('contact') }}">Contact us</a>
                 </li>
+                <select id="list" onchange="change_ex();">
+                    <option value="AUD">AUD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                    <option value="JPY">JPY</option>
+                    <option value="NZD">NZD</option>
+                    <option value="CNY">CNY</option>
+                </select>
             </ul>
         </nav>
 
@@ -364,6 +184,10 @@
                 <img id="deliveroologo" class="deliveroologo" src="{{ url_for('static', filename='deliveroo.png') }}">
             </div>
         </div>
+        <a id="uber"></a>
+        <a id="door"></a>
+        <a id="menu"></a>
+        <a id="deli"></a>
         
         <div id="map"></div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4&callback=initMap"
@@ -388,5 +212,4 @@
     <footer>
         
     </footer>
->>>>>>> master
 </html>
