@@ -1,8 +1,8 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-#from flask_cors import CORS
+from flask import Flask, render_template, request, redirect, url_for
+from flask_cors import CORS, cross_origin
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
 import json
@@ -11,7 +11,7 @@ from exchange import get_exchange
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
-#CORS(app)
+CORS(app)
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -27,6 +27,9 @@ def landingPage2():
         searchtext = request.form.get("search")
         return redirect(url_for('search', searchterms=searchtext))
     return render_template('index.html')
+
+#this route will produce a screen of cards which relate to the
+
 
 #this route will produce a screen of cards which relate to the
 #search terms.
@@ -47,7 +50,7 @@ def search(searchterms):
     if len(where) > 5:
         where = where[:-5]
 
-    cur1.execute(f"""SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM restaurants WHERE {where}""")
+    cur1.execute(f"""SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS WHERE {where}""")
 
     results = []
     #needs to modified to include distance. 
@@ -63,7 +66,6 @@ def search(searchterms):
         }]
 
     return render_template('searchpage.html', results=results)
-
 # #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare(storeid):
@@ -90,14 +92,6 @@ def compare(storeid):
     # print(resDict)
     return render_template('comparepage.html', storeInfo=json.dumps(resDict))
 
-@app.route('/ridlatlong/<rid>')
-def getLatLong(rid):
-    conn = db.connect()
-    cur = conn.cursor()
-    cur.execute("select lat, lng from restaurants where RID={}".format(int(rid)))
-    result = cur.fetchone()
-    cur.close()
-    return jsonify({"lat" : result[0], "lng" : result[1]})
 
 @app.route('/prices', methods=['GET'])
 def getPrices():
@@ -119,6 +113,22 @@ def dbOut():
 #     print('TESTING')
 #     return jsonify(result="find an island")
 
+
+#send the exchangerates to the front end 
+@app.route('/exchange', methods=['GET'])
+def exchanges():
+    print('getting exchange rates')
+    return jsonify(get_exchange())
+'''
+@app.route('/ridlatlong/<rid>')
+def getLatLong(rid):
+    conn = db.connect()
+    cur = conn.cursor()
+    cur.execute("select lat, lng from restaurants where RID={}".format(int(rid)))
+    result = cur.fetchone()
+    cur.close()
+    return jsonify({"lat" : result[0], "lng" : result[1]})
+'''
 """ EXTRA PAGES """
 
 #About page
@@ -136,6 +146,38 @@ def faq():
 def contact():
     return render_template('contact.html')
  
+ #Route for index.js ajax call. 
+@app.route('/getInfo', methods=['POST'])
+def getStoreInfo():
+    resList = request.json
+    print('\n')
+    print(resList)
+    print('\n')
+    resList = resList['ids']
+    conn = db.connect()
+    cur = conn.cursor()
+    formattedList = []
+    scannedIDs = []
+    for each in resList:
+        result = cur.execute("select * from restaurants where Rid={id}".format(id=each)).fetchone()
+        if result[0] not in scannedIDs:
+            resDict = {
+                "id" : result[0],
+                "name" : result[1],
+                "open" : result[2],
+                "photopath" : result[3],
+                "rating" : result[4],
+                "lat" : result[5],
+                "lng" : result[6]
+            }
+            formattedList.append(resDict)
+            scannedIDs.append(result[0])
+    print('\n')
+    print(formattedList)
+    print('\n')
+    formattedList = json.dumps(formattedList)
+    return formattedList
+
 if __name__ == "__main__":
     #getPrices()
     get_exchange()
