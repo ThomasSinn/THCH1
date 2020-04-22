@@ -92,10 +92,6 @@ console.log(prices);
 /* CHANGE THIS ONE FOR THE NEW API */
 /*
 //var prices = [];
-var url = window.location.href;
-var n = url.indexOf("/store/");
-var r_id = parseInt(url.substring(n + 7));
-console.log(url);
 
 var latlong = {}; // object of the lat and longitude 
 const get_lat = async function lat(rid){
@@ -160,8 +156,41 @@ Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 fetch(url).then()
 */
 
+/*
+first update the database which will have the restaurant id 
+    and the cuisine assign cuisine by keywords as they are loaded in
+    
+    query the backend with the id that is stripped from the url 
+    returning the cuisine type
+
+    then get the cuisine from the backend and do the next query for the food 
+*/
+
+// get the store id from the url then use it to call the backend 
+var url = window.location.href;
+var n = url.indexOf("/store/");
+var r_id = parseInt(url.substring(n + 7));
+console.log(url);
+console.log(r_id);
+
+// I want to get the cuisine out of this 
+var cuisine = "";
+const asyncCuisine = async function get_cuisine(r_id){
+    const res5 = await fetch(`http://127.0.0.1:5000/getCuisine/${r_id}`,{
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        }
+    }).then((resp) => resp.json()).then((data) => {
+        cuisine = data;
+        return data;
+    });
+    console.log(res5);
+}
+asyncCuisine(r_id);
+
 let port = 5001;
-let cuisine = "cafe";
+//let cuisine = "cafe";
 var prices = [];
 const asyncFuck = async function get_menu(port, cuisine){
     const res2 = await fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
