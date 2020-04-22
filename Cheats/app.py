@@ -154,8 +154,8 @@ def getmenu():
 
     data = {
         {
-            "name" : "Hamburger",
-            "costs" : {
+            "item" : "Hamburger",
+            "prices" : {
                 "ubereats" : 500,
             }
         }
