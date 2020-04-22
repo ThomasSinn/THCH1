@@ -9,9 +9,9 @@ indianList = ['Tika Masala', 'Lamb Rogan Josh', 'Butter Chicken', 'Naan Bread', 
 chineseList = ['Northern Style Dumplings', 'Southern Style Dumplings', 'Chicken Fried Rice']
 cafeList = ['Muffin', 'Bacon and Egg Roll', 'Flat White Coffee', 'English Breakfast Tea']
 
-italianKeywords = ["pizza", "italian"]
-indianKeywords = ["indian", "curry"]
-chineseKeywords = ["chinese"]
+italianKeywords = ["pizza", "italian", "italy", "pasta"]
+indianKeywords = ["india", "curry", "naan", "punjab"]
+chineseKeywords = ["chinese", "china"]
 
 # default to cafe if no keywords detected
 
@@ -65,8 +65,6 @@ def setuprestaurants(locationobject):
 
     impData = []
     for each in jsonData['results']:
-        print(each)
-        print("\n")
 
         name = each['name'].replace("'", "\'")
         
@@ -80,9 +78,10 @@ def setuprestaurants(locationobject):
         for i, k in megaList.items():
             if k[1]:
                 for kw in k[1]:
-                    if kw in name:
+                    if kw in name.lower():
                         keyword = i
-                        break
+
+        keyword = random.choice(list(megaList.keys()))
 
         itemlist = megaList[keyword][0]
 
@@ -98,7 +97,6 @@ def setuprestaurants(locationobject):
                     service=service,\
                     price=price))
             conn.commit()
-    conn.close()
 
     return impData
 
@@ -110,7 +108,9 @@ conn.execute("""CREATE TABLE food(
     r_lng decimal(3, 7),
     name varchar(256) NOT NULL,
     service varchar(256) NOT NULL,
-    price int NOT NULL);""")
+    price int NOT NULL)""")
 conn.commit()
 
 setuprestaurants(locationOBJ(-33.8635466, 151.1882907, 1000000))
+
+conn.close()
