@@ -128,7 +128,6 @@ def faq():
 def contact():
     return render_template('contact.html')
  
-<<<<<<< HEAD
 @app.route('/LocalRestaurants', methods=['GET'])
 def localrestaurants():
     latitude = request.GET.get('lat')
@@ -192,14 +191,6 @@ def getStoreInfo():
     formattedList = json.dumps(formattedList)
     return formattedList
     
-        
-
-
-
-
-
-=======
->>>>>>> 06262e3c3ea962f2e95822c701dc346b337ab010
 if __name__ == "__main__":
     #getPrices()
     get_exchange()

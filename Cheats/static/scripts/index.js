@@ -98,10 +98,47 @@ function createPrevious(ids){
     console.log(ids);
     var rootForm = document.getElementById("root");
     for(i in ids){
-        each = ids[i];
+        each = ids[i]
+        var mainDiv = document.createElement('div');
+        mainDiv.setAttribute('class', "column");
+        mainDiv.setAttribute('id', each.id)
+        var cardDiv = document.createElement('div')
+        cardDiv.setAttribute('class', 'card');
+        var imgsrc = document.createElement('img');
+        imgsrc.setAttribute('src', each.photopath);
+        imgsrc.setAttribute('style', 'width:100%');
+        cardDiv.appendChild(imgsrc);
+        var container = document.createElement('div');
+        container.setAttribute('class', 'container');
 
-        var nameHolder = document.createElement('h1');
-        nameHolder.innerText = each['name'];
-        rootForm.appendChild(nameHolder)
+        var textTag = document.createElement('h4');
+        //console.log("name as per the results list")
+        //console.log(each.name)
+        textTag.innerText = each.name;
+        container.appendChild(textTag);
+
+        var dis = document.createElement('p');
+        dis.innerText="Distance";
+        dis.setAttribute("id", each.id+"p")
+        var rating = document.createElement('p');
+        rating.innerText = "rating: " + each.rating;
+
+        container.appendChild(dis);
+        container.appendChild(rating);
+        cardDiv.appendChild(container);
+
+        mainDiv.setAttribute('onclick', 'click_handler(this.id)')
+
+        mainDiv.appendChild(cardDiv);
+        rootForm.appendChild(mainDiv);
+        //console.log((document.getElementById(each.id).childNodes)[0].childNodes[1].childNodes[1].innerText);
     }
+}
+
+
+function click_handler(click_id){
+    //alert(click_id)
+    console.log("http://127.0.0.1:5000/store/" + click_id);
+    window.location.href  = "http://127.0.0.1:5000/store/" + click_id;
+        
 }
