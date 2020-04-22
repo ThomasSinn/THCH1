@@ -17,7 +17,7 @@ def handler():
     name = query_parameters.get('name')
 
     cur = sqlite3.connect('API').cursor()
-    itemlist = cur.execute(f"SELECT item_name, service, price from food where r_lat = '{latitude}' AND r_lng = '{longitude}' AND r_name = '{name}'").fetchall()
+    itemlist = cur.execute(f"SELECT name, service, price from food where r_lat = '{latitude}' AND r_lng = '{longitude}' AND r_name = '{name}'").fetchall()
     return json.dumps(GenPriceService(itemlist))
 
 
