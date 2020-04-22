@@ -1,7 +1,7 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 #from flask_cors import CORS
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
@@ -33,12 +33,21 @@ def landingPage2():
 def search(searchterms):
     print(searchterms) #prints the terms passed from the index
     #return render_template('searchpage.html')
+
+    searchkws = searchterms.split()
     conn = db.connect()
     cur1 = conn.cursor()
 
+    where = ""
+
+    for kw in searchkws:
+        where += f"WHERE NAME LIKE '%{kw}%' AND"
+
+    where = where[:-4]
+
     cur1.execute(f"""
     SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS
-    WHERE NAME LIKE '%{searchterms}%'
+    {where}
     ;
     """)
 
@@ -115,29 +124,29 @@ def localrestaurants():
 
     data = {
         {
-            name = "Burger Foods",
-            rating = 4,
-            latitude = latitude,
-            longitude = longitude,
-            photopath = "https://source.unsplash.com/400x400/?burger",
-            rid = 1015
-        }
+            "name" : "Burger Foods",
+            "rating" : 4,
+            "latitude" : latitude,
+            "longitude" : longitude,
+            "photopath" : "https://source.unsplash.com/400x400/?burger",
+            "rid" : 1015
+        },
     }
-    return JsonResponse(data)
+    return jsonify(data)
 
 @app.route('/GetMenu', methods=['GET'])
 def getmenu():
-    latitude = request.GET.get('rid')
+    rid = request.GET.get('rid')
 
     data = {
         {
-            name = "Hamburger",
-            costs = {
-                "ubereats" = 500,
+            "name" : "Hamburger",
+            "costs" : {
+                "ubereats" : 500,
             }
         }
     }
-    return JsonResponse(data)
+    return jsonify(data)
  
 if __name__ == "__main__":
     #getPrices()
