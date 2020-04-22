@@ -1,8 +1,8 @@
 #Python 3.7 controller 
 #uberch'eats project
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-from flask_cors import CORS
+from flask import Flask, render_template, request, redirect, url_for
+from flask_cors import CORS, cross_origin
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
 import json
@@ -27,6 +27,9 @@ def landingPage2():
         searchtext = request.form.get("search")
         return redirect(url_for('search', searchterms=searchtext))
     return render_template('index.html')
+
+#this route will produce a screen of cards which relate to the
+
 
 #this route will produce a screen of cards which relate to the
 #search terms.
@@ -63,7 +66,6 @@ def search(searchterms):
         }]
 
     return render_template('searchpage.html', results=results)
-
 # #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
 def compare(storeid):
@@ -111,6 +113,22 @@ def dbOut():
 #     print('TESTING')
 #     return jsonify(result="find an island")
 
+
+#send the exchangerates to the front end 
+@app.route('/exchange', methods=['GET'])
+def exchanges():
+    print('getting exchange rates')
+    return jsonify(get_exchange())
+'''
+@app.route('/ridlatlong/<rid>')
+def getLatLong(rid):
+    conn = db.connect()
+    cur = conn.cursor()
+    cur.execute("select lat, lng from restaurants where RID={}".format(int(rid)))
+    result = cur.fetchone()
+    cur.close()
+    return jsonify({"lat" : result[0], "lng" : result[1]})
+'''
 """ EXTRA PAGES """
 
 #About page
@@ -128,38 +146,7 @@ def faq():
 def contact():
     return render_template('contact.html')
  
-@app.route('/LocalRestaurants', methods=['GET'])
-def localrestaurants():
-    latitude = request.GET.get('lat')
-    longitude = request.GET.get('long')
-
-    data = {
-        {
-            name : "Burger Foods",
-            rating : 4,
-            latitude : latitude,
-            longitude : longitude,
-            photopath : "https://source.unsplash.com/400x400/?burger",
-            rid : 1015
-        }
-    }
-    return JsonResponse(data)
-
-@app.route('/GetMenu', methods=['GET'])
-def getmenu():
-    latitude = request.GET.get('rid')
-
-    data = {
-        {
-            name : "Hamburger",
-            costs : {
-                "ubereats" : 500,
-            }
-        }
-    }
-    return JsonResponse(data)
- 
-#Route for index.js ajax call. 
+ #Route for index.js ajax call. 
 @app.route('/getInfo', methods=['POST'])
 def getStoreInfo():
     resList = request.json
@@ -191,6 +178,7 @@ def getStoreInfo():
     formattedList = json.dumps(formattedList)
     return formattedList
 
+<<<<<<< HEAD
 @app.route('/getCuisine/<id>')
 def cuisineFinder(id):
     conn = db.connect()
@@ -199,6 +187,8 @@ def cuisineFinder(id):
     result = cursor.execute("SELECT cuisine from restaurant where RID={id}".format(id=id)).fetchone()
     return json.dumps(result)
 
+=======
+>>>>>>> 9a669bf25c97bb0995835e91e0d72eadce9fafe3
 if __name__ == "__main__":
     #getPrices()
     get_exchange()
