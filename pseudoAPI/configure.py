@@ -81,7 +81,7 @@ def setuprestaurants(locationobject):
                     if kw in name.lower():
                         keyword = i
 
-        keyword = random.choice(list(megaList.keys()))
+        #keyword = random.choice(list(megaList.keys()))
 
         itemlist = megaList[keyword][0]
 
