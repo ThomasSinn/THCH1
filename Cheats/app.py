@@ -12,28 +12,6 @@ from exchange import get_exchange
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
 CORS(app)
-'''
-@app.route("/api/orders", methods=["POST", "OPTIONS"])
-def api_create_order():
-    if request.method == "OPTIONS": # CORS preflight
-        return _build_cors_prelight_response()
-    elif request.method == "GET": # The actual request following the preflight
-        order = OrderModel.create(...) # Whatever.
-        return _corsify_actual_response(jsonify(order.to_dict()))
-    else:
-        raise RuntimeError("Weird - don't know how to handle method {}".format(request.method))
-
-def _build_cors_prelight_response():
-    response = make_response()
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add('Access-Control-Allow-Headers', "*")
-    response.headers.add('Access-Control-Allow-Methods', "*")
-    return response
-
-def _corsify_actual_response(response):
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    return response
-'''
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -141,7 +119,7 @@ def dbOut():
 def exchanges():
     print('getting exchange rates')
     return jsonify(get_exchange())
-
+'''
 @app.route('/ridlatlong/<rid>')
 def getLatLong(rid):
     conn = db.connect()
@@ -150,7 +128,7 @@ def getLatLong(rid):
     result = cur.fetchone()
     cur.close()
     return jsonify({"lat" : result[0], "lng" : result[1]})
-
+'''
 """ EXTRA PAGES """
 
 #About page
@@ -168,6 +146,38 @@ def faq():
 def contact():
     return render_template('contact.html')
  
+ #Route for index.js ajax call. 
+@app.route('/getInfo', methods=['POST'])
+def getStoreInfo():
+    resList = request.json
+    print('\n')
+    print(resList)
+    print('\n')
+    resList = resList['ids']
+    conn = db.connect()
+    cur = conn.cursor()
+    formattedList = []
+    scannedIDs = []
+    for each in resList:
+        result = cur.execute("select * from restaurants where Rid={id}".format(id=each)).fetchone()
+        if result[0] not in scannedIDs:
+            resDict = {
+                "id" : result[0],
+                "name" : result[1],
+                "open" : result[2],
+                "photopath" : result[3],
+                "rating" : result[4],
+                "lat" : result[5],
+                "lng" : result[6]
+            }
+            formattedList.append(resDict)
+            scannedIDs.append(result[0])
+    print('\n')
+    print(formattedList)
+    print('\n')
+    formattedList = json.dumps(formattedList)
+    return formattedList
+
 if __name__ == "__main__":
     #getPrices()
     get_exchange()
