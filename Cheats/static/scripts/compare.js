@@ -166,32 +166,45 @@ window.onload = function() {
             var td = document.createElement('TD');
             //td.style.borderRadius = '10px';
             
+            
             if (i==0 && j==1) {
                 //set_image(td, "/../static/5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png");    
                 var l = document.getElementById("ubereatslogo");
+                var uber = document.getElementById("uber");
+                uber.href = "https://www.ubereats.com/au";
+                uber.appendChild(l);
                 l.style.height = "50px";
                 l.style.width = "80px";
-                td.appendChild(l);
+                td.appendChild(uber);
             } else if (i==0 && j==2) {
                 //set_image(td, "{{ url_for('static', filename='Doordash.png') }}");
                 var m = document.getElementById("doordashlogo");
+                var door = document.getElementById("door");
+                door.href = "https://www.doordash.com/en-US";
+                door.appendChild(m);
                 m.style.height = "50px";
                 m.style.width = "80px";
-                td.appendChild(m);
+                td.appendChild(door);
             } 
             else if (i==0 && j==3) {
                 //set_image(td, "{{ url_for('static', filename='menulog.png') }}");
                 var n = document.getElementById("menuloglogo");
+                var menu = document.getElementById("menu");
+                menu.href = "https://www.menulog.com.au/";
+                menu.appendChild(n);
                 n.style.height = "50px";
                 n.style.width = "80px";
-                td.appendChild(n);
+                td.appendChild(menu);
             } 
             else if (i==0 && j==4) {
                 //set_image(td, "{{ url_for('static', filename='deliveroo.png') }}");
-                var o = document.getElementById("deliveroologo");
+                var o = document.getElementById("deliveroologo");   
+                var deli = document.getElementById("deli");
+                deli.href = "https://deliveroo.com.au/";
+                door.appendChild(o);
                 o.style.height = "50px";
                 o.style.width = "80px";
-                td.appendChild(o);
+                td.appendChild(deli);
             } 
             
             if (i != 0) {

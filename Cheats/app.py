@@ -2,7 +2,7 @@
 #uberch'eats project
 
 from flask import Flask, render_template, request, redirect, url_for
-#from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from dbInterface import CreateLoc, ParseDB, dbPrice
 import db
 import json
@@ -11,7 +11,29 @@ from exchange import get_exchange
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
-#CORS(app)
+CORS(app)
+'''
+@app.route("/api/orders", methods=["POST", "OPTIONS"])
+def api_create_order():
+    if request.method == "OPTIONS": # CORS preflight
+        return _build_cors_prelight_response()
+    elif request.method == "GET": # The actual request following the preflight
+        order = OrderModel.create(...) # Whatever.
+        return _corsify_actual_response(jsonify(order.to_dict()))
+    else:
+        raise RuntimeError("Weird - don't know how to handle method {}".format(request.method))
+
+def _build_cors_prelight_response():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    return response
+
+def _corsify_actual_response(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+'''
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -29,6 +51,7 @@ def landingPage2():
     return render_template('index.html')
 
 #this route will produce a screen of cards which relate to the
+
 #search terms.
 @app.route('/search/<searchterms>')
 def search(searchterms):
@@ -60,6 +83,7 @@ def search(searchterms):
 
 # #should be the actual comparison of the gig economy pricing
 @app.route('/store/<storeid>')
+@cross_origin()
 def compare(storeid):
     print("storeID route hit: " + str(storeid))
     conn = db.connect()
@@ -70,6 +94,10 @@ def compare(storeid):
     print('ACTUAL COMPARISON OF GIG ECONOMY PRICING',result)
     print("\n")
     return render_template('comparepage.html', storeInfo=result)
+
+
+
+
 
 
 @app.route('/prices', methods=['GET'])
