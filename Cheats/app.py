@@ -11,7 +11,7 @@ from exchange import get_exchange
 
 from flask import Flask, render_template, request, jsonify
 app = Flask(__name__, static_folder='static/scripts', template_folder='static/pages')
-CORS(app)
+#CORS(app)
 
 #Home Page
 @app.route('/', methods=["GET", "POST"])
@@ -177,6 +177,14 @@ def getStoreInfo():
     print('\n')
     formattedList = json.dumps(formattedList)
     return formattedList
+
+@app.route('/getCuisine/<id>')
+def cuisineFinder(id):
+    conn = db.connect()
+    cursor =conn.cursor()
+
+    result = cursor.execute("SELECT cuisine from restaurants where RID={id}".format(id=id)).fetchone()
+    return json.dumps(result)
 
 if __name__ == "__main__":
     #getPrices()

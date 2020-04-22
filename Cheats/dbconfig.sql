@@ -5,14 +5,15 @@ CREATE TABLE restaurants(
     photoPath varchar(255),
     rating float,
     lat decimal(3, 7),
-    lng decimal(3, 7)
+    lng decimal(3, 7),
+    cuisine varchar(60)
 );
 
 CREATE TABLE menuitems(
     RID integer PRIMARY KEY,
     name varchar(255),
     photoPath varchar(255),
-    priceCents integer,
+    priceCents integer
 );
 
 CREATE TABLE gigPricing(
@@ -22,3 +23,4 @@ CREATE TABLE gigPricing(
     price integer,
     FOREIGN KEY (RID) REFERENCES restaurants(RID)
 );
+
