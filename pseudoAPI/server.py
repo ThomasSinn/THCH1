@@ -37,4 +37,5 @@ def GenPriceService(ItemsList):
 
 
 if __name__ == "__main__":
+    print('hi')
     app.run()
