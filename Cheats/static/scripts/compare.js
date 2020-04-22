@@ -91,8 +91,6 @@ console.log(prices);
 */
 /* CHANGE THIS ONE FOR THE NEW API */
 /*
-let port = 5001;
-let cuisine = "cafe";
 //var prices = [];
 var url = window.location.href;
 var n = url.indexOf("/store/");
@@ -157,11 +155,13 @@ console.log(m);
 
 /*
 var menu_url = new URL(),
-    params = {lat:35.696233, long:139.570431}
+params = {lat:35.696233, long:139.570431}
 Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 fetch(url).then()
 */
 
+let port = 5001;
+let cuisine = "cafe";
 var prices = [];
 const asyncFuck = async function get_menu(port, cuisine){
     const res2 = await fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
@@ -176,6 +176,7 @@ const asyncFuck = async function get_menu(port, cuisine){
     console.log(res2)
     asyncFuck(port, cuisine);
 }
+asyncFuck(port, cuisine);
 /*
 const main = (port, cuisine) => {
     const result = asyncFuck(port, cuisine);
@@ -212,6 +213,7 @@ console.log(rates);
 */
 var rates = {};
 const asyncFuck2 = async () => {
+    console.log('asyncFUCK2');
     const res3 = await fetch('http://127.0.0.1:5000/exchange',{
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -222,11 +224,11 @@ const asyncFuck2 = async () => {
     });
     console.log('inside the async');
     console.log(res3);
-    asyncFuck2();
     rates = res3;
 }
 console.log('outside async');
 console.log(rates);
+asyncFuck2();
 
 //console.log(rates);
 /*
