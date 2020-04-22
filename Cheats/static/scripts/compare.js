@@ -174,9 +174,9 @@ const asyncFuck = async function get_menu(port, cuisine){
         return data;
     });
     console.log(res2)
-    asyncFuck(port, cuisine);
 }
 asyncFuck(port, cuisine);
+
 /*
 const main = (port, cuisine) => {
     const result = asyncFuck(port, cuisine);
