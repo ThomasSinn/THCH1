@@ -62,7 +62,7 @@ fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
 //console.log(obj)
 */
 
-
+/*
 let port = 5001;
 let cuisine = "cafe";
 //var prices = [];
@@ -84,10 +84,32 @@ const main = (port, cuisine) => {
     return result;
 }
 
+
 let prices = main(port, cuisine);
 console.log("Prices dict");
 console.log(prices);
+*/
 
+const asyncFuck2 = async () => {
+    const res3 = await fetch('http://api.exchangeratesapi.io/latest?base=AUD&symbols=USD,GBP,JPY,CNY,NZD,EUR',{
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        }
+    }).then((resp) => resp.json()).then((data) => {
+        return data;
+    });
+    console.log(res3)
+}
+
+const main2 = () => {
+    const result1 = asyncFuck2();
+    return result1;
+}
+
+let rates = main2();
+console.log("rates dict");
+console.log(rates);
 
 
 //This is the code for the boxes but not fully working so commented out 
@@ -150,6 +172,15 @@ function set_image(parent, url) {
     parent.appendChild(img);   
 }  
 window.onload = function() {
+    if(getCookie("storeId") == ""){
+        createCookie(info);
+    }else{
+        var cur = getCookie('storeId');
+        //alert(cur)
+        document.cookie = "storeId=" + cur + "," + info.id + ";" + "path=/";
+        alert(getCookie('storeId'))
+    }
+
     var body = document.getElementById("TBL");
     var table = document.createElement('TABLE');
     var tblB = document.createElement('TBODY');
@@ -223,25 +254,29 @@ window.onload = function() {
         }
     }
     body.appendChild(table)
-    //initMap();
+   
 }
 
-// function updateInfo(info){
-//     info = JSON.parse(info)
-//     console.log(info)
-//     return info
-// }
+//gets the cookie if it exsits
+//will just append further ids on to the cookie after that
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
 
-// // window.onload = function(){
-// //     initMap();
-// // }
+//creates a new cookie if required. 
+function createCookie(Info){
+    document.cookie = 'storeId=' + Info.id + ";" + "path=/";
+}
 
-// function initMap(store){
-//     var map;
-//     console.log(store)
-//     //console.log(storeInfo.lat + " " + storeInfo.lng)
-//     map = new google.maps.Map(document.getElementById('map'), {
-//         center: {lat: -34.397, lng: 150.644},
-//         zoom: 8
-//     });
-// }
