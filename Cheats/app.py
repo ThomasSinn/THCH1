@@ -42,15 +42,12 @@ def search(searchterms):
     where = ""
 
     for kw in searchkws:
-        where += f"WHERE NAME LIKE '%{kw}%' AND"
+        where += f"NAME LIKE '%{kw}%' AND "
 
-    where = where[:-4]
+    if len(where) > 5:
+        where = where[:-5]
 
-    cur1.execute(f"""
-    SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS
-    {where}
-    ;
-    """)
+    cur1.execute(f"""SELECT NAME, PHOTOPATH, RID, rating, lat, lng FROM RESTAURANTS WHERE {where}""")
 
     results = []
     #needs to modified to include distance. 
