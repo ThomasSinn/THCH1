@@ -131,37 +131,6 @@ def faq():
 def contact():
     return render_template('contact.html')
  
-@app.route('/LocalRestaurants', methods=['GET'])
-def localrestaurants():
-    latitude = request.GET.get('lat')
-    longitude = request.GET.get('long')
-
-    data = {
-        {
-            "name" : "Burger Foods",
-            "rating" : 4,
-            "latitude" : latitude,
-            "longitude" : longitude,
-            "photopath" : "https://source.unsplash.com/400x400/?burger",
-            "rid" : 1015
-        },
-    }
-    return jsonify(data)
-
-@app.route('/GetMenu', methods=['GET'])
-def getmenu():
-    rid = request.GET.get('rid')
-
-    data = {
-        {
-            "item" : "Hamburger",
-            "prices" : {
-                "ubereats" : 500,
-            }
-        }
-    }
-    return jsonify(data)
- 
 if __name__ == "__main__":
     #getPrices()
     get_exchange()
