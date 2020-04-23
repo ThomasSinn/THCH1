@@ -110,6 +110,7 @@ nav {
     border-radius: 40px;
     padding: 10px;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 .contact-box{
     position: absolute;
@@ -122,6 +123,7 @@ nav {
     border-radius: 40px;
     padding: 10px;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 .about-text{
@@ -139,4 +141,5 @@ nav {
     border-radius: 40px;
     padding: 10px;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
