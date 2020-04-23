@@ -178,7 +178,7 @@ window.onload = function() {
         var cur = getCookie('storeId');
         //alert(cur)
         document.cookie = "storeId=" + cur + "," + info.id + ";" + "path=/";
-        alert(getCookie('storeId'))
+        //alert(getCookie('storeId'))
     }
 
     var body = document.getElementById("TBL");

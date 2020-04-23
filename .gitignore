@@ -1,4 +1,5 @@
 
 *.pyc
 Cheats/static/pages/.DS_Store
-*.pyc
+
+Cheats/database

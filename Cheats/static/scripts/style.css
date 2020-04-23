@@ -8,7 +8,7 @@ body{
     background-color: rgb(121, 121, 202);
 }
 
-nav{
+nav {
     display: flex;
     justify-content: space-around;
     align-items: center;
