@@ -6,10 +6,10 @@ conn = sqlite3.connect('API')
 
 italianList = ["pizza", "lasagna", "garlic bread", "salad"]
 indianList = ['Tika Masala', 'Lamb Rogan Josh', 'Butter Chicken', 'Naan Bread', 'Basamati Rice', 'Jasmine Rice']
-chineseList = ['Northern Style Dumplings', 'Southern Style Dumplings', 'Chicken Fried Rice']
+chineseList = ['Northern Style Dumplings', 'Southern Style Dumplings', 'Chicken Fried Rice', 'sushi']
 cafeList = ['Muffin', 'Bacon and Egg Roll', 'Flat White Coffee', 'English Breakfast Tea']
 
-megaList = [{"type" : "italian", "list" : italianList}, {"type" : "indian", "list" : indianList}, {"type" : "chinese", "list": chineseList}, {"type": "cafe", "list" : cafeList}]
+megaList = [{"type" : "italian", "list" : italianList}, {"type" : "indian", "list" : indianList}, {"type" : "asian", "list": chineseList}, {"type": "cafe", "list" : cafeList}]
 
 cur = conn.cursor()
 

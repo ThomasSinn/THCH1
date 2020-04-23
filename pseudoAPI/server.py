@@ -6,9 +6,8 @@ import sqlite3
 import json
 import random
 
-
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 #returns pricing of cuisine for each service. 
 @app.route('/menuPricing/<cuisine>')

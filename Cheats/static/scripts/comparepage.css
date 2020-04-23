@@ -1,3 +1,162 @@
+<<<<<<< HEAD
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body, html{
+    background: white;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: rgb(216, 215, 215);
+    /*font-family: 'Poppins', sans-serif; */
+    font-family:'Avenir LT W01 85 Heavy';
+}
+
+.logo{
+    /*color: rgb(266,266,266); */
+    color: black;
+    text-transform: uppercase;
+    float: left;
+    align-items: center;
+    align-content: center;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.nav-links{
+    display: flex;
+    float: right;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    width: 30%;
+}
+
+.nav-links li{
+    list-style: none;
+}
+
+.nav-links a{
+    /*color: rgb(266,266,266);*/
+    color: black; 
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px; 
+}
+
+.grid-wrapper{
+    position: absolute;
+    display: grid; 
+    grid-template-columns: repeat(5, 6fr);
+    grid-template-rows: 50px;
+    grid-gap: 1rem;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    padding: 1rem;
+}
+
+.grid-wrapper div{
+    background: white;
+    height: 50px;
+    width: 80px;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.grid-1, .grid-5, .grid-9, .grid-13 {
+    border: solid black 2px;
+    /*border-color: black; */
+}
+
+.grid-2, .grid-6, .grid-10, .grid-14 {
+    border: solid red 2px;
+    /*border-color: black; */
+}
+
+.grid-3, .grid-7, .grid-11, .grid-15 {
+    border: solid rgb(8, 196, 8) 2px;
+    /*border-color: black; */
+}
+
+.grid-4, .grid-8, .grid-12, .grid-16 {
+    border: solid rgb(54, 42, 231) 2px;
+    /*border-color: black; */
+}
+
+.img-location {
+    width: 400px;
+    /* height scales with the width */
+    top: 30%;
+    left: 70%;
+    transform: translate(175%,35%);
+}
+
+.location-title {
+    display: flex;
+    position: relative;
+    top: 90px;
+    left: 700px;
+    font-size: 20px;
+}
+
+.grid-wrapper img{
+    width: 75px;
+}
+/*
+:root {
+    --grid-cols: 1;
+    --grid-rows: 1;
+  }
+  
+  #container {
+    display: grid;
+    position: absolute;
+    grid-gap: 1rem;
+    grid-template-rows: repeat(var(--grid-rows), 6fr);
+    grid-template-columns: repeat(var(--grid-cols), 6fr);
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%,-50%);
+}
+
+  .grid-item {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    text-align: center;
+    height: 50px;
+    width: 80px;
+    border-radius: 10px;
+}
+*/
+table td{
+    /*border:2px solid red;*/
+    background: white;
+    height: 50px;
+    width: 80px;
+    padding: 10px;
+    border-collapse: separate;
+}
+table {
+    margin:auto;
+}
+
+body log div img{
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    border-radius: 10px;
+    padding: 10px;
+}
+=======
 *{
     margin: 0px;
     padding: 0px;
@@ -112,3 +271,4 @@ body log div img{
     border-radius: 10px;
     padding: 10px;
 }
+>>>>>>> master

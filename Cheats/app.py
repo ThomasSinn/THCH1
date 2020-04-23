@@ -183,7 +183,7 @@ def cuisineFinder(id):
     conn = db.connect()
     cursor =conn.cursor()
 
-    result = cursor.execute("SELECT cuisine from restaurant where RID={id}".format(id=id)).fetchone()
+    result = cursor.execute("SELECT cuisine from restaurants where RID={id}".format(id=id)).fetchone()
     return json.dumps(result)
 
 if __name__ == "__main__":

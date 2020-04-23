@@ -13,7 +13,7 @@ CREATE TABLE menuitems(
     RID integer PRIMARY KEY,
     name varchar(255),
     photoPath varchar(255),
-    priceCents integer,
+    priceCents integer
 );
 
 CREATE TABLE gigPricing(
