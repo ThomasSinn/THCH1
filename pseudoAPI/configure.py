@@ -13,6 +13,13 @@ megaList = [{"type" : "italian", "list" : italianList}, {"type" : "indian", "lis
 
 cur = conn.cursor()
 
+conn.execute("DROP TABLE IF EXISTS FOOD")
+conn.execute("""CREATE TABLE food(
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    item_name varchar(200) NOT NULL,
+    cuisine varchar(40) NOT NULL
+)""")
+
 for lilList in megaList:
     print('creating tables for {}'.format(lilList['type']))
     for each in lilList['list']:

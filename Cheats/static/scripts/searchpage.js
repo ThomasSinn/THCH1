@@ -70,14 +70,22 @@ function getDistance(resResults, userLocation){
         request = request + "&destinations=" + lat + "," + lng;
         request = request + "&key=" + AUTH_KEY;
         console.log(request)
+        ajaxDistance(request, id)
         //document.getElementById(each.id).childNodes)[0].childNodes[1].childNodes[1].innerText
-        $.post(request, function(data){
-            console.log(data)
-            $(id+"p").replaceWith(data.rows[0].elements[0].distance.text);
-
-            //document.getElementById(id+'p').innerText = data.rows[0].elements[0].distance.text;
-            //console.log(document.getElementById(id+'p'));
-            
-        });
+        
     };
+}
+
+function ajaxDistance(request, id){
+
+    $.post(request, function(data){
+        console.log(data.rows[0].elements[0].distance.text);
+        //console.log("#" + id + "p");
+        console.log(id)
+        $("#" + id + "p").replaceWith("Distance: " + data.rows[0].elements[0].distance.text);
+
+        //document.getElementById(id+'p').innerText = data.rows[0].elements[0].distance.text;
+        //console.log(document.getElementById(id+'p'));
+        
+    });
 }

@@ -23,4 +23,3 @@ CREATE TABLE gigPricing(
     price integer,
     FOREIGN KEY (RID) REFERENCES restaurants(RID)
 );
-
