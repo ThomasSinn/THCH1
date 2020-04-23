@@ -178,7 +178,6 @@ def getStoreInfo():
     formattedList = json.dumps(formattedList)
     return formattedList
 
-<<<<<<< HEAD
 @app.route('/getCuisine/<id>')
 def cuisineFinder(id):
     conn = db.connect()
@@ -187,8 +186,6 @@ def cuisineFinder(id):
     result = cursor.execute("SELECT cuisine from restaurant where RID={id}".format(id=id)).fetchone()
     return json.dumps(result)
 
-=======
->>>>>>> 9a669bf25c97bb0995835e91e0d72eadce9fafe3
 if __name__ == "__main__":
     #getPrices()
     get_exchange()
