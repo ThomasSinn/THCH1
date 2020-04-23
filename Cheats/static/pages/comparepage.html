@@ -71,7 +71,7 @@
                 <li>
                     <a href="{{ url_for('contact') }}">Contact us</a>
                 </li>
-                <select id="list" onchange="change_ex();">
+                <select id="list" onchange="asyncFuck();">
                     <option value="AUD">AUD</option>
                     <option value="EUR">EUR</option>
                     <option value="USD">USD</option>
@@ -172,22 +172,32 @@
         <div id="map"></div>
         <div id="TBL" class="log">
             <div class="ubereats">
-                <img id="ubereatslogo" class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
+                <a id="uber" href="">
+                    <img id="ubereatslogo" class="ubereatslogo" src="{{ url_for('static', filename='5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png') }}">
+                </a>
             </div>
             <div class="doordash">
-                <img id="doordashlogo" class="doordashlogo" src="{{ url_for('static', filename='Doordash.png') }}">
+                <a id="door" href="">
+                    <img id="doordashlogo" class="doordashlogo" src="{{ url_for('static', filename='Doordash.png') }}">
+                </a>
             </div>
             <div class="menulog">
-                <img id="menuloglogo" class="menuloglogo" src="{{ url_for('static', filename='menulog.png') }}">
+                <a id="menu" href="">
+                    <img id="menuloglogo" class="menuloglogo" src="{{ url_for('static', filename='menulog.png') }}">
+                </a>
             </div>
-            <div class="deliveroo">
-                <img id="deliveroologo" class="deliveroologo" src="{{ url_for('static', filename='deliveroo.png') }}">
+            <div class="deliveroo"> 
+                <a id="deli" href="">
+                    <img id="deliveroologo" class="deliveroologo" src="{{ url_for('static', filename='deliveroo.png') }}">
+                </a>
             </div>
         </div>
-        <a id="uber"></a>
-        <a id="door"></a>
-        <a id="menu"></a>
-        <a id="deli"></a>
+        <!--
+            <a id="uber" href=""></a>
+            <a id="door" href=""></a>
+            <a id="menu" href=""></a>
+            <a id="deli" href=""></a>
+        -->
         
         <div id="map"></div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHAlJ2Qs0KBhp4gWuJ2tl1JcNkwVvf5w4&callback=initMap"

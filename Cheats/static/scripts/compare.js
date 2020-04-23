@@ -167,44 +167,6 @@ first update the database which will have the restaurant id
 */
 
 // get the store id from the url then use it to call the backend 
-var url = window.location.href;
-var n = url.indexOf("/store/");
-var r_id = parseInt(url.substring(n + 7));
-console.log(url);
-console.log(r_id);
-
-// I want to get the cuisine out of this 
-var cuisine = "";
-const asyncCuisine = async function get_cuisine(r_id){
-    const res5 = await fetch(`http://127.0.0.1:5000/getCuisine/${r_id}`,{
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Accept': 'application/json'
-        }
-    }).then((resp) => resp.json()).then((data) => {
-        cuisine = data;
-        return data;
-    });
-    console.log(res5);
-    asyncFuck(port, cuisine[0]);
-}
-asyncCuisine(r_id);
-
-let port = 5001;
-var prices = [];
-const asyncFuck = async function get_menu(port, cuisine){
-    const res2 = await fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'Accept': 'application/json'
-        }
-    }).then((resp) => resp.json()).then((data) => {
-        prices = data;
-        return data;
-    });
-    console.log(res2)
-}
-console.log(cuisine[0]);
 
 /*
 const main = (port, cuisine) => {
@@ -240,24 +202,86 @@ let rates = main2();
 console.log("rates dict");
 console.log(rates);
 */
+var url = window.location.href;
+var n = url.indexOf("/store/");
+var r_id = parseInt(url.substring(n + 7));
+console.log(url);
+console.log(r_id);
+
+// I want to get the cuisine out of this 
+var cuisine = "";
+let port = 5001;
+var prices = [];
+//console.log(cuisine[0]);
 var rates = {};
-const asyncFuck2 = async () => {
-    console.log('asyncFUCK2');
-    const res3 = await fetch('http://127.0.0.1:5000/exchange',{
+/*
+const asyncCuisine = async function get_cuisine(r_id){
+    const res5 = await fetch(`http://127.0.0.1:5000/getCuisine/${r_id}`,{
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
             'Accept': 'application/json'
         }
     }).then((resp) => resp.json()).then((data) => {
+        cuisine = data;
         return data;
     });
+    console.log(res5);
+    asyncFuck(port, cuisine[0]);
+}
+asyncCuisine(r_id);
+*/
+c = 0;
+const asyncFuck = async function get_menu(r_id){
+    if (c == 0) {
+        const res5 = await fetch(`http://127.0.0.1:5000/getCuisine/${r_id}`,{
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json'
+            }
+        }).then((resp) => resp.json()).then((data) => {
+            cuisine = data;
+            return data;
+        });
+        console.log(res5);
+        //asyncFuck(port, cuisine[0]);
+
+        const res2 = await fetch(`http://127.0.0.1:${port}/menuPricing/${cuisine}`,{
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json'
+            }
+        }).then((resp) => resp.json()).then((data) => {
+            prices = data;
+            return data;
+        });
+        console.log(res2)
+        //}
+        //const asyncFuck2 = async () => {
+        console.log('asyncFUCK2');
+        const res3 = await fetch('http://127.0.0.1:5000/exchange',{
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Accept': 'application/json'
+            }
+        }).then((resp) => resp.json()).then((data) => {
+            return data;
+        });
+        console.log(res3);
+        rates = res3;
+    }
     console.log('inside the async');
-    console.log(res3);
-    rates = res3;
+    change_ex(prices, rates);
+    var e = document.createElement("div");    
+    var ex_ = document.getElementById("list").value;
+    ex_ = String(ex_);
+    e.innerHTML = rates[ex_];
+    var exch = document.getElementById('list');
+    exch.appendChild(e);
+    c=1;
 }
 console.log('outside async');
 console.log(rates);
-asyncFuck2();
+asyncFuck(r_id);
 
 //console.log(rates);
 /*
@@ -282,23 +306,106 @@ we need to make a click button maybe in the nav bar dropdown menu? to change the
 let change = 0;
 
 // if change = 1 then it has been changed before
-change_ex = (prices) => {
+change_ex = (prices, rates) => {
     var curr = document.getElementById("list").value;
-    
-    console.log("CHANGING THE PRICES");
-    //location.reload(true);
-    var ex_prices = [];
-    // multiply the prices dictionary 
-    for (i=0;i<length(prices);i++) {
-        let p_list = prices[i]["prices"];
-        for (j=0; j < length(p_list); j++) {
-            prices[i]["prices"][j]["price"] = prices[i]["prices"][j]["price"] * rates[curr];
+    console.log(curr);
+    curr = String(curr);
+    console.log(rates);
+    if (rates[curr] != undefined) {
+        console.log("CHANGING THE PRICES");
+        //location.reload(true);
+        var ex_prices = [];
+        // multiply the prices dictionary 
+        for (i=0;i<prices.length;i++) {
+            let p_list = prices[i]["prices"];
+            for (j=0; j < p_list.length; j++) {
+                console.log(prices[i]["prices"][j]["price"]);
+                console.log(rates[curr]);
+                console.log(curr);
+                prices[i]["prices"][j]["price"] = prices[i]["prices"][j]["price"] * rates[curr];
+                prices[i]["prices"][j]["price"] = prices[i]["prices"][j]["price"].toFixed(2);
+                console.log(prices[i]["prices"][j]["price"]);
+            }
+        }
+        change = 1;
+        console.log("the changed prices are");
+        console.log(prices);
+        console.log(curr);
+
+        var body = document.getElementById("TBL");
+        var table = document.getElementById('TAB');
+        var tblB = document.getElementById('tblB');
+
+        //table.appendChild(tblB);
+        row = 5;
+        col = 5;
+        for (var i=0; i<row; i++)
+        {
+            var tr = document.getElementById('tr' + i);
+            //tblB.appendChild(tr);
+            
+            for (var j=0; j<col; j++) {
+                //var td = document.createElement('TD');
+                var td = document.getElementById(i*row + j);
+                //td.style.borderRadius = '10px';
+                /*
+                if (i==0 && j==1) {
+                    //set_image(td, "/../static/5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png");    
+                    var l = document.getElementById("ubereatslogo");
+                    l.style.height = "50px";
+                    l.style.width = "80px";
+                    td.appendChild(l);
+                } else if (i==0 && j==2) {
+                    //set_image(td, "{{ url_for('static', filename='Doordash.png') }}");
+                    var m = document.getElementById("doordashlogo");
+                    m.style.height = "50px";
+                    m.style.width = "80px";
+                    td.appendChild(m);
+                } 
+                else if (i==0 && j==3) {
+                    //set_image(td, "{{ url_for('static', filename='menulog.png') }}");
+                    var n = document.getElementById("menuloglogo");
+                    n.style.height = "50px";
+                    n.style.width = "80px";
+                    td.appendChild(n);
+                } 
+                else if (i==0 && j==4) {
+                    //set_image(td, "{{ url_for('static', filename='deliveroo.png') }}");
+                    var o = document.getElementById("deliveroologo");
+                    o.style.height = "50px";
+                    o.style.width = "80px";
+                    td.appendChild(o);
+                } 
+                */
+                if (i != 0 && change != 0) {
+                    if ((i*row + j)%5 == 0) {
+                        console.log(prices[i-1]["item"]);
+                        console.log(i-1);
+                        td.innerHTML = prices[i-1]["item"];
+                    }
+                    if ((i*row + j - 1)%5 == 0) {
+                        td.style.border = "solid black 2px";
+                        td.innerHTML = prices[i-1]["prices"][0]["price"]
+                    }
+                    if ((i*row + j - 2)%5 == 0) {
+                        td.style.border = "solid red 2px";
+                        td.innerHTML = prices[i-1]["prices"][2]["price"]
+                    }
+                    if ((i*row + j - 3)%5 == 0) {
+                        td.style.border = "solid rgb(8, 196, 8)  2px";
+                        td.innerHTML = prices[i-1]["prices"][3]["price"]
+                    }
+                    if ((i*row + j - 4)%5 == 0) {
+                        td.style.border = "solid rgb(54, 42, 231) 2px";
+                        td.innerHTML = prices[i-1]["prices"][1]["price"]
+                    }
+                }
+                //tr.appendChild(td);
+            }
         }
     }
+    //body.appendChild(table)
     change = 1;
-    console.log("the changed prices are");
-    console.log(prices);
-    console.log(curr);
     return prices;
     
     //var p = 1; 
@@ -315,19 +422,21 @@ function set_image(parent, url) {
     parent.appendChild(img);   
 }  
 
-window.onload = function() {
+window.onload = function () {
     if(getCookie("storeId") == ""){
         createCookie(info);
     }else{
         var cur = getCookie('storeId');
         //alert(cur)
         document.cookie = "storeId=" + cur + "," + info.id + ";" + "path=/";
-        alert(getCookie('storeId'))
+        //alert(getCookie('storeId'))
     }
 
     var body = document.getElementById("TBL");
     var table = document.createElement('TABLE');
+    table.id = 'TAB';
     var tblB = document.createElement('TBODY');
+    tblB.id = 'tblB';
     
     table.appendChild(tblB);
     row = 5;
@@ -335,38 +444,52 @@ window.onload = function() {
     for (var i=0; i<row; i++)
     {
         var tr = document.createElement('TR');
+        tr.id = 'tr' + i;
+        console.log(tr.id);
         tblB.appendChild(tr);
         
         for (var j=0; j<col; j++) {
             var td = document.createElement('TD');
+            td.id = i*row + j;
             //td.style.borderRadius = '10px';
-            
             if (i==0 && j==1) {
                 //set_image(td, "/../static/5310383-uber-eats-logo-png-93-images-in-collection-page-1-uber-eats-png-1200_630_preview.png");    
                 var l = document.getElementById("ubereatslogo");
+                var link1 = document.getElementById('uber');
+                link1.href = "https://www.ubereats.com/au";
                 l.style.height = "50px";
                 l.style.width = "80px";
-                td.appendChild(l);
+                //link1.appendChild(l)
+                td.appendChild(link1);
             } else if (i==0 && j==2) {
                 //set_image(td, "{{ url_for('static', filename='Doordash.png') }}");
                 var m = document.getElementById("doordashlogo");
+                var link2 = document.getElementById('door');
+                link2.href = "https://www.doordash.com/en-US";
                 m.style.height = "50px";
                 m.style.width = "80px";
-                td.appendChild(m);
+                //link1.appendChild(m)
+                td.appendChild(link2);
             } 
             else if (i==0 && j==3) {
                 //set_image(td, "{{ url_for('static', filename='menulog.png') }}");
                 var n = document.getElementById("menuloglogo");
+                var link3 = document.getElementById('menu');
+                link3.href = "https://www.menulog.com.au/";
                 n.style.height = "50px";
                 n.style.width = "80px";
-                td.appendChild(n);
+                //link3.appendChild(n)
+                td.appendChild(link3);
             } 
             else if (i==0 && j==4) {
                 //set_image(td, "{{ url_for('static', filename='deliveroo.png') }}");
                 var o = document.getElementById("deliveroologo");
+                var link4 = document.getElementById('deli');
+                link4.href = "https://deliveroo.com.au/";
                 o.style.height = "50px";
                 o.style.width = "80px";
-                td.appendChild(o);
+                //link1.appendChild(o)
+                td.appendChild(link4);
             } 
             
             if (i != 0) {
@@ -400,6 +523,7 @@ window.onload = function() {
     body.appendChild(table)
    
 }
+
 
 //gets the cookie if it exsits
 //will just append further ids on to the cookie after that
