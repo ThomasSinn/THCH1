@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 
-body{
-    background-color: rgb(121, 121, 202);
+body {
+    background-color: DDD;
 }
 
 nav {
@@ -13,14 +13,15 @@ nav {
     justify-content: space-around;
     align-items: center;
     min-height: 8vh;
+    width: 100%;
     background-color: white;
-    /*font-family: 'Poppins', sans-serif; */
-    font-family:'Avenir LT W01 85 Heavy';
+    font-family: 'Poppins', sans-serif;
+    padding: 5px;
+    /*font-family:'Avenir LT W01 85 Heavy';*/
 }
 
 .logo{
     /*color: rgb(266,266,266); */
-    display: flex;
     color: black;
     text-transform: uppercase;
     float: left;
@@ -33,6 +34,7 @@ nav {
 
 .home{
     text-decoration: none;
+    font-size: 40px;
 }
 
 .nav-links{
@@ -67,20 +69,21 @@ nav {
     width: 400px;
     border-radius: 40px;
     padding: 10px;
-
+    align-items: center;
+    align-content: center;
 }
 
 .search-btn{
     color: rgb(126, 121, 121);
     float: right;
-    height: 60x;
-    width: 50px; 
+    height: 50px;
+    width: 50px;
     font-size: 30px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-decoration: none;
+    position: absolute;
+    top: 3;
+    right: 10
 }
 
 
